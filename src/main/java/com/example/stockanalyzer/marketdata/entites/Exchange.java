@@ -1,5 +1,32 @@
 package com.example.stockanalyzer.marketdata.entites;
 
-public class Exchange {
-    
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+public class Exchange extends BaseModel {
+
+
+    @Column(name="name", nullable = false)
+    private String name;
+
+    @Column(name="code", nullable = false)
+    private String code;
+
+    @Column(name="country", nullable = false)
+    private String country;
+
+    @Column(name="currency", nullable = false)
+    private String currency;
+
+    @Column(name="is_active", nullable = false)
+    private Boolean isActive;
 }
