@@ -1,5 +1,7 @@
 package com.example.stockanalyzer.marketdata.entites;
 
+import java.time.Instant;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
@@ -26,6 +28,12 @@ public class Exchange extends BaseModel {
 
     @Column(name="currency", nullable = false)
     private String currency;
+
+    @Column(name="open_time", nullable = false)
+    private Instant openTime;
+
+    @Column(name="close_time", nullable = false)
+    private Instant closeTime;
 
     @Column(name="is_active", nullable = false)
     private Boolean isActive;
