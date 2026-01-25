@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -21,22 +23,30 @@ public class StockPrice extends BaseModel {
     @JoinColumn(name = "stock_id", nullable = false)
     private Stock stock;
 
+    @ManyToOne
+    @JoinColumn(name = "data_source_id")
+    private DataSource dataSource;
+
     @Column(name="time_stamp", nullable = false)
     private Instant timestamp;
 
-    @Column(name="open", nullable = false, precision = 19, scale = 4)
+    @Column(name="interval", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private PriceInterval interval;
+
+    @Column(name="open_price", nullable = false, precision = 19, scale = 4)
     private BigDecimal open;
 
-    @Column(name="high", nullable = false, precision = 19, scale = 4)
+    @Column(name="high_price", nullable = false, precision = 19, scale = 4)
     private BigDecimal high;
 
-    @Column(name="low", nullable = false, precision = 19, scale = 4)
+    @Column(name="low_price", nullable = false, precision = 19, scale = 4)
     private BigDecimal low;
 
-    @Column(name="close", nullable = false, precision = 19, scale = 4)
+    @Column(name="close_price", nullable = false, precision = 19, scale = 4)
     private BigDecimal close;
 
-    @Column(name="volume", nullable = false)
+    @Column(name="total_volume", nullable = false)
     private Long volume;
 
 
