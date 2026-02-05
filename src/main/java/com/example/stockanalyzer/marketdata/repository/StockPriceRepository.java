@@ -1,6 +1,7 @@
 package com.example.stockanalyzer.marketdata.repository;
 
 import java.time.Instant;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -23,4 +24,13 @@ public interface StockPriceRepository extends JpaRepository<StockPrice, Long> {
             @Param("timestamp") Instant timestamp,
             @Param("interval") PriceInterval interval
     );
+
+    /**
+     * Find stock prices by stock and date range, optionally by interval
+     */
+    List<StockPrice> findByStockIdAndTimestampBetweenOrderByTimestampAsc(
+            Long stockId, Instant from, Instant to);
+
+    List<StockPrice> findByStockIdAndIntervalAndTimestampBetweenOrderByTimestampAsc(
+            Long stockId, PriceInterval interval, Instant from, Instant to);
 }

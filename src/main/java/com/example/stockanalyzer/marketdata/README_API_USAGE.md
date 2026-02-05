@@ -92,3 +92,36 @@ Configure rate limits in the `data_sources` table:
 - `rate_limit_per_day`: Requests per day
 
 The service respects these limits to avoid API throttling.
+
+## WebSocket (real-time price updates)
+
+When OHLC data is fetched and saved (e.g. via `POST /api/market-data/fetch`), new prices are broadcast over WebSocket so clients can receive them in real time.
+
+### Endpoint
+- **STOMP over SockJS:** `http://localhost:8080/ws` (use this URL in SockJS client)
+
+### Topics to subscribe to
+| Topic | Description |
+|-------|-------------|
+| `/topic/stock-prices` | All stock price updates (payload: array of `StockPriceMessage`) |
+| `/topic/stock-prices/{stockId}` | Updates only for the given stock (e.g. `/topic/stock-prices/1`) |
+
+### Payload shape (`StockPriceMessage`)
+- `id`, `stockId`, `symbol`, `stockName`, `timestamp`, `interval`, `open`, `high`, `low`, `close`, `volume`
+
+### Example (JavaScript with SockJS + STOMP)
+```javascript
+const socket = new SockJS('http://localhost:8080/ws');
+const client = Stomp.over(socket);
+client.connect({}, () => {
+  client.subscribe('/topic/stock-prices', (msg) => {
+    const updates = JSON.parse(msg.body);
+    console.log('Price updates:', updates);
+  });
+  client.subscribe('/topic/stock-prices/1', (msg) => {
+    console.log('Stock 1 updates:', JSON.parse(msg.body));
+  });
+});
+```
+
+Use the **sockjs-client** and **@stomp/stompjs** (or **stompjs**) npm packages in a frontend to connect.
