@@ -1,9 +1,15 @@
+version: "3.9"
+
 services:
-  postgres:
-    image: 'postgres:latest'
-    environment:
-      - 'POSTGRES_DB=stockanalyzer'
-      - 'POSTGRES_PASSWORD=postgres'
-      - 'POSTGRES_USER=postgres'
+  market-data-ingestion:
+    build: .
+    container_name: market-data-ingestion
+    restart: unless-stopped
+
     ports:
-      - '5432'
+      - "8080:8080"
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://172.31.28.226:5432/stocks
+      SPRING_DATASOURCE_USERNAME: stockuser
+      SPRING_DATASOURCE_PASSWORD: strongpassword
