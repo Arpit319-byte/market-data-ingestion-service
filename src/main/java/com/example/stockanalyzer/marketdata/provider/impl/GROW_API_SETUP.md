@@ -1,4 +1,4 @@
-# Grow API Integration Setup
+ # Grow API Integration Setup
 
 ## Overview
 The Grow API provider fetches real-time OHLC (Open, High, Low, Close) data from Grow's API.

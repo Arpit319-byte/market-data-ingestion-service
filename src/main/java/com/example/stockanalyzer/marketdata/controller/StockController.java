@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.stockanalyzer.marketdata.entites.PriceInterval;
 import com.example.stockanalyzer.marketdata.entites.Stock;
 import com.example.stockanalyzer.marketdata.entites.StockPrice;
-import com.example.stockanalyzer.marketdata.repository.StockPriceRepository;
-import com.example.stockanalyzer.marketdata.repository.StockRepository;
+import com.example.stockanalyzer.marketdata.service.StockService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,8 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class StockController {
 
-    private final StockRepository stockRepository;
-    private final StockPriceRepository stockPriceRepository;
+    private final StockService stockService;
 
     /**
      * List all stocks (optionally active only).
@@ -38,8 +36,7 @@ public class StockController {
     @GetMapping
     public ResponseEntity<List<Stock>> listStocks(
             @RequestParam(defaultValue = "false") boolean activeOnly) {
-        List<Stock> stocks = activeOnly ? stockRepository.findByIsActiveTrue() : stockRepository.findAll();
-        return ResponseEntity.ok(stocks);
+        return ResponseEntity.ok(stockService.listStocks(activeOnly));
     }
 
     /**
@@ -48,7 +45,7 @@ public class StockController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<Stock> getStock(@PathVariable Long id) {
-        return stockRepository.findById(id)
+        return stockService.getStock(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -63,9 +60,6 @@ public class StockController {
             @RequestParam(required = false) String from,
             @RequestParam(required = false) String to,
             @RequestParam(required = false) PriceInterval interval) {
-        if (!stockRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
         Instant fromInstant;
         Instant toInstant;
         try {
@@ -74,9 +68,8 @@ public class StockController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
-        List<StockPrice> prices = interval != null
-                ? stockPriceRepository.findByStockIdAndIntervalAndTimestampBetweenOrderByTimestampAsc(id, interval, fromInstant, toInstant)
-                : stockPriceRepository.findByStockIdAndTimestampBetweenOrderByTimestampAsc(id, fromInstant, toInstant);
-        return ResponseEntity.ok(prices);
+        return stockService.getStockPrices(id, fromInstant, toInstant, interval)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
