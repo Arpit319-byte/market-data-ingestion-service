@@ -5,16 +5,26 @@ This service fetches OHLC (Open, High, Low, Close) data from third-party APIs an
 
 ## Setup
 
-### 1. Configure Data Source
-First, create a data source in the database:
+### 1. Create Exchange
+```sql
+INSERT INTO exchange (name, code, country, currency, open_time, close_time, is_active, created_at, updated_at)
+VALUES ('National Stock Exchange', 'NSE', 'India', 'INR', '2024-01-01 09:15:00+00', '2024-01-01 15:30:00+00', true, NOW(), NOW());
+```
 
+### 2. Create Stock
+```sql
+INSERT INTO stocks (symbol, name, exchange_id, isactive, created_at, updated_at)
+VALUES ('RELIANCE', 'Reliance Industries Ltd', 1, true, NOW(), NOW());
+```
+
+### 3. Configure Groww Data Source
 ```sql
 INSERT INTO data_sources (name, provider_type, api_endpoint, api_key, is_active, priority, created_at, updated_at)
 VALUES (
-    'Alpha Vantage',
+    'Grow API',
     'REST_API',
-    'https://www.alphavantage.co/query',
-    'YOUR_API_KEY_HERE',
+    'https://api.groww.in/v1/live-data/ohlc',
+    'YOUR_ACCESS_TOKEN_HERE',
     true,
     1,
     NOW(),
@@ -22,16 +32,7 @@ VALUES (
 );
 ```
 
-### 2. Create Stock and Exchange
-```sql
--- Create exchange
-INSERT INTO exchange (name, code, country, currency, open_time, close_time, is_active, created_at, updated_at)
-VALUES ('New York Stock Exchange', 'NYSE', 'USA', 'USD', '2024-01-01 09:30:00+00', '2024-01-01 16:00:00+00', true, NOW(), NOW());
-
--- Create stock
-INSERT INTO stocks (symbol, name, exchange_id, isactive, created_at, updated_at)
-VALUES ('AAPL', 'Apple Inc.', 1, true, NOW(), NOW());
-```
+See [GROW_API_SETUP.md](provider/impl/GROW_API_SETUP.md) for detailed Groww API setup.
 
 ## API Endpoints
 
@@ -67,15 +68,10 @@ public void fetchData() {
 
 ## Supported Providers
 
-### Alpha Vantage
-- Endpoint: `https://www.alphavantage.co/query`
-- Requires API key
-- Supports: Intraday (1min, 5min, 15min, 30min, 60min) and Daily data
-
-### Yahoo Finance
-- Endpoint: `https://query1.finance.yahoo.com/v8/finance/chart`
-- No API key required
-- Supports: Multiple intervals
+### Grow API (Groww)
+- Live: `https://api.groww.in/v1/live-data/ohlc`
+- Requires Bearer token (or API key + secret in config)
+- Supports: Indian stocks (NSE, BSE)
 
 ## Error Handling
 

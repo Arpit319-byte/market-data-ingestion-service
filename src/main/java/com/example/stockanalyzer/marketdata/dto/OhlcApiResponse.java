@@ -12,8 +12,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Generic DTO for OHLC API responses
- * Adapts to different provider formats (Alpha Vantage, Yahoo Finance, etc.)
+ * Generic DTO for OHLC API responses.
+ * Internal format used after provider-specific responses are converted.
  */
 @Data
 @NoArgsConstructor
@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OhlcApiResponse {
     
-    // For Alpha Vantage format
+    // Time series by interval (e.g. daily, intraday)
     @JsonProperty("Time Series (Daily)")
     private Map<String, TimeSeriesData> timeSeriesDaily;
     
@@ -37,7 +37,6 @@ public class OhlcApiResponse {
     @JsonProperty("Time Series (60min)")
     private Map<String, TimeSeriesData> timeSeries60min;
     
-    // For Yahoo Finance format
     @JsonProperty("chart")
     private ChartData chart;
     
@@ -71,7 +70,7 @@ public class OhlcApiResponse {
         @JsonProperty("5. volume")
         private String volume;
         
-        // Alternative field names (Yahoo Finance)
+        // Alternative numeric field names
         @JsonProperty("open")
         private BigDecimal openPrice;
         

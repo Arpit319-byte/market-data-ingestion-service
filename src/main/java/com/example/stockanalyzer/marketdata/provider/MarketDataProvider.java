@@ -33,7 +33,7 @@ public interface MarketDataProvider {
     /**
      * Gets the provider name
      * 
-     * @return Provider name (e.g., "Grow API", "Alpha Vantage")
+     * @return Provider name (e.g., "Grow API")
      */
     String getProviderName();
 }
