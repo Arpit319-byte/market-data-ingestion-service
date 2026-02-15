@@ -2,6 +2,8 @@ package com.example.stockanalyzer.marketdata.provider.impl;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -215,7 +217,7 @@ public class GrowApiProvider implements MarketDataProvider {
         OhlcApiResponse.TimeSeriesData data = parseOhlcString(ohlcString);
         
         // Use current timestamp as key (since this is real-time data)
-        String timestampKey = Instant.now().toString();
+        String timestampKey = LocalDate.now(ZoneId.of("Asia/Kolkata")).toString();
         timeSeries.put(timestampKey, data);
         
         // Set as daily time series (since Grow API returns current snapshot)
