@@ -28,6 +28,9 @@ public class Stock  extends BaseModel{
     @JoinColumn(name = "exchange_id", nullable = false)
     private Exchange exchange;
 
+    @Column(name="segment", nullable = false)
+    private String segment;
+
     @Column(name ="isactive", nullable = false)
     private Boolean isActive;
 }

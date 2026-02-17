@@ -18,4 +18,6 @@ public interface StockRepository extends JpaRepository<Stock, Long> {
      * Find all active stocks (for scheduled fetch)
      */
     List<Stock> findByIsActiveTrue();
+
+    Optional<Stock> findBySymbolAndExchangeId(String symbol,Long id);
 }

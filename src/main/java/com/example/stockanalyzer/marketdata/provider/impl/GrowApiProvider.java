@@ -1,7 +1,6 @@
 package com.example.stockanalyzer.marketdata.provider.impl;
 
 import java.time.Duration;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.HashMap;
