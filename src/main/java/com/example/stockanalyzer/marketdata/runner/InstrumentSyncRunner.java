@@ -36,8 +36,7 @@ public class InstrumentSyncRunner implements ApplicationRunner {
         try{
             var result = growwInstrumentService.fetchAndSyncInstrument();
             log.info("Startup instruments sync complete: {} created, {} updated", result.created(), result.updated());
-        }catch(Exception ex){
-            log.info("Startup instrument sync call failed on the startup");
+        } catch (Exception ex) {
             log.error("Startup instrument sync failed", ex);
         }
     }

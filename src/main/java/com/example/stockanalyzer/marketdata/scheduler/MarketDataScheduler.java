@@ -36,10 +36,9 @@ public class MarketDataScheduler {
     )
     public void fetchMarketData(){
           
-          log.info("Scheduller is being called to fetch the data from the Groww");
+          log.info("Scheduler is being called to fetch the data from the Groww");
 
-          DataSource dataSource=dataSourceRepository.findAll().stream()
-                                .filter(ds-> Boolean.TRUE.equals(ds.getIsActive()))
+          DataSource dataSource = dataSourceRepository.findByIsActiveTrueOrderByPriorityAsc().stream()
                                 .findFirst()
                                 .orElse(null);
 
@@ -69,9 +68,8 @@ public class MarketDataScheduler {
                 log.info("OHLC was successfully fetched for the stock->"+stock.getSymbol()+" from the dataSource->"+dataSource.getName()+" and the OHLC->"+stockPrice.toString());
               }
 
-            }catch(Exception ex){
-              log.error("Fetch failed for the stock->"+stock.getSymbol()+" from->"+dataSource.getName());
-              ex.printStackTrace();
+            } catch (Exception ex) {
+              log.error("Fetch failed for the stock->{} from->{}", stock.getSymbol(), dataSource.getName(), ex);
             }
 
             try {
