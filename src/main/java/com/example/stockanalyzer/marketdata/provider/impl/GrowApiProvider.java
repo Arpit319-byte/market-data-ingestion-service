@@ -1,12 +1,6 @@
 package com.example.stockanalyzer.marketdata.provider.impl;
 
 import java.time.Duration;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -21,6 +15,7 @@ import com.example.stockanalyzer.marketdata.entites.Stock;
 import com.example.stockanalyzer.marketdata.exception.MarketDataException;
 import com.example.stockanalyzer.marketdata.provider.MarketDataProvider;
 import com.example.stockanalyzer.marketdata.repository.StockRepository;
+import com.example.stockanalyzer.marketdata.service.GrowwTokenService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,11 +23,9 @@ import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 
 /**
- * Implementation for Grow API provider
+ * Implementation for Grow API provider.
+ * HTTP fetching and URL building delegated to this class; response parsing delegated to GrowwOhlcResponseParser.
  * API Documentation: https://api.groww.in/v1/live-data/ohlc
- * 
- * Note: This API returns real-time OHLC data (current snapshot).
- * For historical interval-based data, use the Historical Data API.
  */
 @Slf4j
 @Component
@@ -41,12 +34,8 @@ public class GrowApiProvider implements MarketDataProvider {
 
     private final WebClient webClient;
     private final StockRepository stockRepository;
-    private final com.example.stockanalyzer.marketdata.service.GrowwTokenService growwTokenService;
-    
-    // Pattern to parse OHLC string: "{open: 149.50,high: 150.50,low: 148.50,close: 149.50}"
-    private static final Pattern OHLC_PATTERN = Pattern.compile(
-        "\\{open:\\s*([\\d.]+),\\s*high:\\s*([\\d.]+),\\s*low:\\s*([\\d.]+),\\s*close:\\s*([\\d.]+)\\}"
-    );
+    private final GrowwTokenService growwTokenService;
+    private final GrowwOhlcResponseParser growwOhlcResponseParser;
 
     @Override
     public boolean supports(DataSource dataSource) {
@@ -108,7 +97,7 @@ public class GrowApiProvider implements MarketDataProvider {
                         log.error("Grow API call failed: {}", error.getMessage());
                     }
                 })
-                .map(this::convertToOhlcApiResponse))
+                .map(growwOhlcResponseParser::parse))
                 .onErrorMap(error -> {
                     if (error instanceof WebClientResponseException) {
                         WebClientResponseException ex = (WebClientResponseException) error;
@@ -184,65 +173,6 @@ public class GrowApiProvider implements MarketDataProvider {
         
         // Default to CASH for regular stocks
         return "CASH";
-    }
-
-    /**
-     * Converts Grow API response to standard OhlcApiResponse format
-     */
-    private OhlcApiResponse convertToOhlcApiResponse(GrowApiResponse growResponse) {
-        if (!"SUCCESS".equalsIgnoreCase(growResponse.getStatus())) {
-            throw new MarketDataException(
-                "Grow API returned error: " + growResponse.getError() + 
-                " - " + growResponse.getMessage()
-            );
-        }
-
-        if (growResponse.getPayload() == null || growResponse.getPayload().isEmpty()) {
-            throw new MarketDataException("Grow API returned empty payload");
-        }
-
-        // Convert Grow API format to standard format
-        // Grow returns: {"NSE_RELIANCE": "{open: 149.50,high: 150.50,low: 148.50,close: 149.50}"}
-        // We need: TimeSeriesData format
-        
-        OhlcApiResponse response = new OhlcApiResponse();
-        Map<String, OhlcApiResponse.TimeSeriesData> timeSeries = new HashMap<>();
-        
-        // Get the first (and typically only) entry from payload
-        Map.Entry<String, String> entry = growResponse.getPayload().entrySet().iterator().next();
-        String ohlcString = entry.getValue();
-        
-        // Parse OHLC string: "{open: 149.50,high: 150.50,low: 148.50,close: 149.50}"
-        OhlcApiResponse.TimeSeriesData data = parseOhlcString(ohlcString);
-        
-        // Use current timestamp as key (since this is real-time data)
-        String timestampKey = LocalDate.now(ZoneId.of("Asia/Kolkata")).toString();
-        timeSeries.put(timestampKey, data);
-        
-        // Set as daily time series (since Grow API returns current snapshot)
-        response.setTimeSeriesDaily(timeSeries);
-        
-        return response;
-    }
-
-    /**
-     * Parses OHLC string format: "{open: 149.50,high: 150.50,low: 148.50,close: 149.50}"
-     */
-    private OhlcApiResponse.TimeSeriesData parseOhlcString(String ohlcString) {
-        Matcher matcher = OHLC_PATTERN.matcher(ohlcString.trim());
-        
-        if (!matcher.matches()) {
-            throw new MarketDataException("Failed to parse OHLC string: " + ohlcString);
-        }
-        
-        OhlcApiResponse.TimeSeriesData data = new OhlcApiResponse.TimeSeriesData();
-        data.setOpen(matcher.group(1));
-        data.setHigh(matcher.group(2));
-        data.setLow(matcher.group(3));
-        data.setClose(matcher.group(4));
-        data.setVolume("0"); // Grow API OHLC doesn't include volume
-        
-        return data;
     }
 
     @Override
