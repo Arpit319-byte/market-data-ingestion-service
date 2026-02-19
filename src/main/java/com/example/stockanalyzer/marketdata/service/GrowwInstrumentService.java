@@ -30,7 +30,6 @@ public class GrowwInstrumentService {
     private static final String SERIES_EQ = "EQ";
 
     private final GrowwInstrumentFetcher growwInstrumentFetcher;
-    private final InstrumentCsvParser instrumentCsvParser;
     private final ExchangeRepository exchangeRepository;
     private final StockRepository stockRepository;
 
@@ -51,7 +50,7 @@ public class GrowwInstrumentService {
 
     @Transactional
     public SyncResult parseAndSync(String csvBody) {
-        var rows = instrumentCsvParser.parse(csvBody);
+        var rows = InstrumentCsvParser.parse(csvBody);
         if (rows.isEmpty()) {
             log.warn("CSV has no data rows or invalid headers");
             return new SyncResult(0, 0);

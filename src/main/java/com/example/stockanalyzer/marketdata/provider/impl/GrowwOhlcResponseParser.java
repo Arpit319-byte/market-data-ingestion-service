@@ -7,18 +7,15 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.springframework.stereotype.Component;
-
 import com.example.stockanalyzer.marketdata.dto.GrowApiResponse;
 import com.example.stockanalyzer.marketdata.dto.OhlcApiResponse;
 import com.example.stockanalyzer.marketdata.exception.MarketDataException;
 
 /**
- * Parser responsible for converting Grow API response format to standard OhlcApiResponse.
- * Single responsibility: parse Grow-specific OHLC format.
+ * Utility for converting Grow API response format to standard OhlcApiResponse.
+ * Stateless, no dependencies - simple class, not a Spring component.
  */
-@Component
-public class GrowwOhlcResponseParser {
+public final class GrowwOhlcResponseParser {
 
     private static final Pattern OHLC_PATTERN = Pattern.compile(
             "\\{open:\\s*([\\d.]+),\\s*high:\\s*([\\d.]+),\\s*low:\\s*([\\d.]+),\\s*close:\\s*([\\d.]+)\\}"
@@ -26,10 +23,12 @@ public class GrowwOhlcResponseParser {
 
     private static final ZoneId INDIA_ZONE = ZoneId.of("Asia/Kolkata");
 
+    private GrowwOhlcResponseParser() {}
+
     /**
      * Converts Grow API response to standard OhlcApiResponse format.
      */
-    public OhlcApiResponse parse(GrowApiResponse growResponse) {
+    public static OhlcApiResponse parse(GrowApiResponse growResponse) {
         if (!"SUCCESS".equalsIgnoreCase(growResponse.getStatus())) {
             throw new MarketDataException(
                     "Grow API returned error: " + growResponse.getError() +
@@ -57,7 +56,7 @@ public class GrowwOhlcResponseParser {
     /**
      * Parses OHLC string format: "{open: 149.50,high: 150.50,low: 148.50,close: 149.50}"
      */
-    public OhlcApiResponse.TimeSeriesData parseOhlcString(String ohlcString) {
+    public static OhlcApiResponse.TimeSeriesData parseOhlcString(String ohlcString) {
         Matcher matcher = OHLC_PATTERN.matcher(ohlcString.trim());
 
         if (!matcher.matches()) {

@@ -3,16 +3,13 @@ package com.example.stockanalyzer.marketdata.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
 import com.example.stockanalyzer.marketdata.dto.InstrumentRow;
 
 /**
- * Parser responsible for parsing instruments CSV content to domain objects.
- * Single responsibility: CSV parsing only.
+ * Utility for parsing instruments CSV content to domain objects.
+ * Stateless, no dependencies - simple class, not a Spring component.
  */
-@Component
-public class InstrumentCsvParser {
+public final class InstrumentCsvParser {
 
     private static final String HEADER_EXCHANGE = "exchange";
     private static final String HEADER_TRADING_SYMBOL = "trading_symbol";
@@ -20,11 +17,13 @@ public class InstrumentCsvParser {
     private static final String HEADER_SEGMENT = "segment";
     private static final String HEADER_SERIES = "series";
 
+    private InstrumentCsvParser() {}
+
     /**
      * Parses CSV content and returns list of instrument rows.
      * Returns empty list if headers are invalid or data is missing.
      */
-    public List<InstrumentRow> parse(String csvBody) {
+    public static List<InstrumentRow> parse(String csvBody) {
         if (csvBody == null || csvBody.isBlank()) {
             return List.of();
         }

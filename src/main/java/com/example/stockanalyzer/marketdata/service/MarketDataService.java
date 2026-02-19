@@ -40,7 +40,6 @@ public class MarketDataService {
     private final StockPriceRepository stockPriceRepository;
     private final DataIngestionJobService dataIngestionJobService;
     private final MarketDataProviderService marketDataProviderService;
-    private final OhlcToStockPriceMapper ohlcToStockPriceMapper;
     private final ApplicationEventPublisher eventPublisher;
 
     /**
@@ -92,7 +91,7 @@ public class MarketDataService {
 
     private ConvertResult convertAndSave(OhlcApiResponse response, Stock stock, DataSource dataSource,
                                         PriceInterval interval, DataIngestionJob job) {
-        Map<String, OhlcApiResponse.TimeSeriesData> series = ohlcToStockPriceMapper.selectTimeSeries(response, interval);
+        Map<String, OhlcApiResponse.TimeSeriesData> series = OhlcToStockPriceMapper.selectTimeSeries(response, interval);
         if (series == null || series.isEmpty()) {
             log.warn("No time series data for interval {} in response", interval);
             return new ConvertResult(0, List.of());
@@ -100,13 +99,13 @@ public class MarketDataService {
         int fetched = series.size();
         List<StockPrice> saved = new ArrayList<>();
         for (Map.Entry<String, OhlcApiResponse.TimeSeriesData> entry : series.entrySet()) {
-            var timestamp = ohlcToStockPriceMapper.parseTimestamp(entry.getKey());
+            var timestamp = OhlcToStockPriceMapper.parseTimestamp(entry.getKey());
             OhlcApiResponse.TimeSeriesData data = entry.getValue();
             if (data == null) continue;
             if (stockPriceRepository.existsByStockIdAndTimestampAndInterval(stock.getId(), timestamp, interval)) {
                 continue;
             }
-            StockPrice sp = ohlcToStockPriceMapper.toStockPrice(stock, dataSource, timestamp, interval, data);
+            StockPrice sp = OhlcToStockPriceMapper.toStockPrice(stock, dataSource, timestamp, interval, data);
             sp = stockPriceRepository.save(sp);
             saved.add(sp);
         }

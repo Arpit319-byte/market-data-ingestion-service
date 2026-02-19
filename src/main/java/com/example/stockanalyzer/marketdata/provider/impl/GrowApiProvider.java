@@ -35,7 +35,6 @@ public class GrowApiProvider implements MarketDataProvider {
     private final WebClient webClient;
     private final StockRepository stockRepository;
     private final GrowwTokenService growwTokenService;
-    private final GrowwOhlcResponseParser growwOhlcResponseParser;
 
     @Override
     public boolean supports(DataSource dataSource) {
@@ -97,7 +96,7 @@ public class GrowApiProvider implements MarketDataProvider {
                         log.error("Grow API call failed: {}", error.getMessage());
                     }
                 })
-                .map(growwOhlcResponseParser::parse))
+                .map(GrowwOhlcResponseParser::parse))
                 .onErrorMap(error -> {
                     if (error instanceof WebClientResponseException) {
                         WebClientResponseException ex = (WebClientResponseException) error;

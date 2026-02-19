@@ -8,8 +8,6 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
-import org.springframework.stereotype.Component;
-
 import com.example.stockanalyzer.marketdata.dto.OhlcApiResponse;
 import com.example.stockanalyzer.marketdata.entites.DataSource;
 import com.example.stockanalyzer.marketdata.entites.PriceInterval;
@@ -17,19 +15,20 @@ import com.example.stockanalyzer.marketdata.entites.Stock;
 import com.example.stockanalyzer.marketdata.entites.StockPrice;
 
 /**
- * Mapper responsible for converting OHLC API response data to StockPrice entities.
- * Single responsibility: OHLC to StockPrice conversion and timestamp parsing.
+ * Utility for converting OHLC API response data to StockPrice entities.
+ * Stateless, no dependencies - simple class, not a Spring component.
  */
-@Component
-public class OhlcToStockPriceMapper {
+public final class OhlcToStockPriceMapper {
 
     private static final DateTimeFormatter DATE_ONLY = DateTimeFormatter.ISO_LOCAL_DATE;
     private static final DateTimeFormatter DATE_TIME = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
+    private OhlcToStockPriceMapper() {}
+
     /**
      * Selects the appropriate time series from the response based on interval.
      */
-    public Map<String, OhlcApiResponse.TimeSeriesData> selectTimeSeries(OhlcApiResponse response, PriceInterval interval) {
+    public static Map<String, OhlcApiResponse.TimeSeriesData> selectTimeSeries(OhlcApiResponse response, PriceInterval interval) {
         return switch (interval) {
             case ONE_MINUTE -> response.getTimeSeries1min();
             case FIVE_MINUTE -> response.getTimeSeries5min();
@@ -42,7 +41,7 @@ public class OhlcToStockPriceMapper {
     /**
      * Parses a timestamp string to Instant.
      */
-    public Instant parseTimestamp(String key) {
+    public static Instant parseTimestamp(String key) {
         if (key == null || key.isBlank()) return Instant.now();
         try {
             return Instant.parse(key);
@@ -59,8 +58,8 @@ public class OhlcToStockPriceMapper {
     /**
      * Maps a single OHLC time series entry to a StockPrice entity.
      */
-    public StockPrice toStockPrice(Stock stock, DataSource dataSource, Instant timestamp, PriceInterval interval,
-                                   OhlcApiResponse.TimeSeriesData data) {
+    public static StockPrice toStockPrice(Stock stock, DataSource dataSource, Instant timestamp, PriceInterval interval,
+                                         OhlcApiResponse.TimeSeriesData data) {
         StockPrice sp = new StockPrice();
         sp.setStock(stock);
         sp.setDataSource(dataSource);
