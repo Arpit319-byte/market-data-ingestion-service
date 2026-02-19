@@ -13,6 +13,7 @@ import com.example.stockanalyzer.marketdata.entites.Exchange;
 import com.example.stockanalyzer.marketdata.entites.PriceInterval;
 import com.example.stockanalyzer.marketdata.entites.Stock;
 import com.example.stockanalyzer.marketdata.exception.MarketDataException;
+import com.example.stockanalyzer.marketdata.parser.GrowwOhlcResponseParser;
 import com.example.stockanalyzer.marketdata.provider.MarketDataProvider;
 import com.example.stockanalyzer.marketdata.repository.StockRepository;
 import com.example.stockanalyzer.marketdata.service.GrowwTokenService;

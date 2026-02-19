@@ -1,4 +1,4 @@
-package com.example.stockanalyzer.marketdata.provider.impl;
+package com.example.stockanalyzer.marketdata.parser;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
