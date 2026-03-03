@@ -9,11 +9,11 @@ import com.example.stockanalyzer.marketdata.entites.FinancialPeriodType;
 
 interface CompanyFinancialRepository  extends JpaRepository<CompanyFinancial,Long>{
 
-    List<CompanyFinancial> findByStockIdOrderByYearDescQuaterDesc(Long id);
+    List<CompanyFinancial> findByStockIdOrderByYearDescQuarterDesc(Long id);
 
     List<CompanyFinancial> findByStockIdAndPeriodType(Long id,FinancialPeriodType period);
 
-    Optional<CompanyFinancial>  findByStockIdAndYearAndQuater(Long id ,Integer year,Integer quater);
+    Optional<CompanyFinancial>  findByStockIdAndYearAndQuarter(Long id ,Integer year,Integer quater);
 
     
     
