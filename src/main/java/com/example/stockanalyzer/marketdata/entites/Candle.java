@@ -3,8 +3,6 @@ package com.example.stockanalyzer.marketdata.entites;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -57,7 +55,7 @@ public class Candle extends BaseModel{
 
     @Column(name = "trade_count")
     private Long tradeCount;
-    
+
     @Column(name = "vwap", precision = 19, scale = 4)
     private BigDecimal vwap;
 }
