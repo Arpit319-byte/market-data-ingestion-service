@@ -14,6 +14,10 @@ public class IntradayCandleIngestionScheduler {
 
     private final CandleIngestionService candleIngestionService;
 
+
+    /*
+        This Scheduler is called to fetch the Intraday candle stick 
+    */
     @Scheduled(cron = "${kite.scheduler.intraday-cron:0 */5 9-15 * * MON-FRI}", zone = "Asia/Kolkata")
     public void fetchIntradayCandles() {
         try {

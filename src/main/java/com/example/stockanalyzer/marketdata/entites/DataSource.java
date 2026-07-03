@@ -2,6 +2,8 @@ package com.example.stockanalyzer.marketdata.entites;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,13 +22,17 @@ public class DataSource extends BaseModel {
     private String name;
 
     @Column(name = "provider_type", nullable = false)
-    private String providerType;
+    @Enumerated(EnumType.STRING)
+    private ProviderType providerType;
 
     @Column(name = "api_endpoint", nullable = false)
     private String apiEndpoint;
 
     @Column(name = "api_key")
     private String apiKey;
+
+    @Column(name = "api_secret")
+    private String apiSecret;
 
     @Column(name = "rate_limit_per_minute")
     private Integer rateLimitPerMinute;

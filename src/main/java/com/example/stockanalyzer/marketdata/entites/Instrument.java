@@ -34,9 +34,12 @@ public class Instrument extends BaseModel{
     @Column(name = "series", length = 20)
     private String series;
 
+    @Column(name = "kite_instrument_token")
+    private Long kiteInstrumentToken;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "instrument_type", nullable = false, length = 50)
-     private InstrumentType instrumentType;
+    private InstrumentType instrumentType;
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive = true;

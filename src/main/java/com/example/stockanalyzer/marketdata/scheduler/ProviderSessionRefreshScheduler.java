@@ -16,7 +16,7 @@ public class ProviderSessionRefreshScheduler {
     private final ProviderAuthRegistry providerAuthRegistry;
 
     @Scheduled(cron = "${provider.scheduler.session-refresh-cron:0 30 8 * * MON-FRI}", zone = "Asia/Kolkata")
-    public void refreshSessionsBeforeMarketOpen() {
+    public void fetchData() {
         dataSourceRepository.findByIsActiveTrueOrderByPriorityAsc().forEach(dataSource -> {
             try {
                 providerAuthRegistry.resolve(dataSource).refreshSession(dataSource);
