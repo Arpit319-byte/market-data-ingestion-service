@@ -2,7 +2,6 @@ package com.example.stockanalyzer.marketdata.dto;
 
 import java.time.Instant;
 import com.example.stockanalyzer.marketdata.entites.IntervalType;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

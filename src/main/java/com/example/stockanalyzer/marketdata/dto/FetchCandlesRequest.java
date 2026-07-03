@@ -1,4 +1,6 @@
 package com.example.stockanalyzer.marketdata.dto;
+import java.time.Instant;
+
 import com.example.stockanalyzer.marketdata.entites.IntervalType;
 
 import lombok.AllArgsConstructor;
@@ -19,5 +21,7 @@ public class FetchCandlesRequest{
     private Long instrumentId;
     private Long dataSourceId;
     private IntervalType intervalType;
+    private Instant from;
+    private Instant to;
       
 }

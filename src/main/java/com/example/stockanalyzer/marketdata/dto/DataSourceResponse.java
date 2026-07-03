@@ -3,38 +3,34 @@ package com.example.stockanalyzer.marketdata.dto;
 import java.time.Instant;
 
 import com.example.stockanalyzer.marketdata.entites.DataSource;
+import com.example.stockanalyzer.marketdata.entites.ProviderType;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * API response for {@link DataSource}. Does not expose {@code apiKey}.
  */
-public record DataSourceResponse(
-        Long id,
-        String name,
-        String providerType,
-        String apiEndpoint,
-        Integer rateLimitPerMinute,
-        Integer rateLimitPerDay,
-        Integer timeoutSeconds,
-        boolean active,
-        Integer priority,
-        String description,
-        Instant createdAt,
-        Instant updatedAt
-) {
-    public static DataSourceResponse from(DataSource dataSource) {
-        return new DataSourceResponse(
-                dataSource.getId(),
-                dataSource.getName(),
-                dataSource.getProviderType(),
-                dataSource.getApiEndpoint(),
-                dataSource.getRateLimitPerMinute(),
-                dataSource.getRateLimitPerDay(),
-                dataSource.getTimeoutSeconds(),
-                Boolean.TRUE.equals(dataSource.getIsActive()),
-                dataSource.getPriority(),
-                dataSource.getDescription(),
-                dataSource.getCreatedAt(),
-                dataSource.getUpdatedAt()
-        );
-    }
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class DataSourceResponse{
+
+        private Long id;
+        private String name;
+        private ProviderType providerType;
+        private String apiEndpoint;
+        private Integer rateLimitPerMinute;
+        private Integer rateLimitPerDay;
+        private Integer timeoutSeconds;
+        private boolean active;
+        private Integer priority;
+        private String description;
+        private Instant createdAt;
+        private Instant updatedAt;
+
 }
