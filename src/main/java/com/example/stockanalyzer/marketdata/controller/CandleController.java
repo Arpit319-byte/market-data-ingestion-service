@@ -2,19 +2,22 @@ package com.example.stockanalyzer.marketdata.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.stockanalyzer.marketdata.dto.BackgroundJobResponse;
 import com.example.stockanalyzer.marketdata.dto.CandleQueryRequest;
 import com.example.stockanalyzer.marketdata.dto.CandleResponse;
 import com.example.stockanalyzer.marketdata.dto.FetchCandlesRequest;
+import com.example.stockanalyzer.marketdata.service.CandleBackfillJobService;
 import com.example.stockanalyzer.marketdata.service.CandleIngestionService;
 import com.example.stockanalyzer.marketdata.service.CandleQueryService;
-import com.example.stockanalyzer.marketdata.service.HistoricalCandleService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,7 +28,7 @@ public class CandleController {
 
     private final CandleQueryService candleQueryService;
     private final CandleIngestionService candleIngestionService;
-    private final HistoricalCandleService historicalCandleService;
+    private final CandleBackfillJobService candleBackfillJobService;
 
     @GetMapping
     public List<CandleResponse> query(
@@ -40,9 +43,14 @@ public class CandleController {
     }
 
     @PostMapping("/backfill")
-    public int backfill(
+    public ResponseEntity<BackgroundJobResponse> backfill(
             @RequestParam(defaultValue = "90") int minuteDays,
             @RequestParam(defaultValue = "365") int dailyDays) {
-        return historicalCandleService.backfill(minuteDays, dailyDays);
+        return ResponseEntity.accepted().body(candleBackfillJobService.start(minuteDays, dailyDays));
+    }
+
+    @GetMapping("/backfill/{id}")
+    public BackgroundJobResponse backfillStatus(@PathVariable Long id) {
+        return candleBackfillJobService.get(id);
     }
 }

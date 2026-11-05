@@ -7,6 +7,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+import com.example.stockanalyzer.marketdata.service.ClusterLeaderService;
 import com.example.stockanalyzer.marketdata.service.LiveMarketStreamService;
 import com.example.stockanalyzer.marketdata.stream.MarketSession;
 
@@ -19,10 +20,12 @@ public class LiveStreamStartup implements ApplicationRunner {
 
     private final LiveMarketStreamService liveMarketStreamService;
     private final MarketSession marketSession;
+    private final ClusterLeaderService clusterLeaderService;
 
     @Override
     public void run(ApplicationArguments args) {
-        if (marketSession.isOpen(ZonedDateTime.now(marketSession.zone()))) {
+        if (clusterLeaderService.renew()
+                && marketSession.isOpen(ZonedDateTime.now(marketSession.zone()))) {
             liveMarketStreamService.start();
         }
     }

@@ -13,9 +13,10 @@ import lombok.RequiredArgsConstructor;
 public class KiteClientFactory {
 
     private final BrokerSessionService brokerSessionService;
+    private final KiteCredentials kiteCredentials;
 
     public KiteConnect create(DataSource dataSource) {
-        KiteConnect kiteConnect = new KiteConnect(dataSource.getApiKey());
+        KiteConnect kiteConnect = new KiteConnect(kiteCredentials.apiKey(dataSource));
         kiteConnect.setSessionExpiryHook(() -> brokerSessionService.expireSession(dataSource));
         return kiteConnect;
     }

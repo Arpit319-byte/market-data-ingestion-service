@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.stockanalyzer.marketdata.StockAnalyzerMarketDataApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-11-05T21:08:49.222Z" hostname="Arpits-MacBook-Air.local" time="0.232">
+<testsuite name="com.example.stockanalyzer.marketdata.StockAnalyzerMarketDataApplicationTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-11-05T21:32:51.485Z" hostname="Arpits-MacBook-Air.local" time="0.002">
   <properties/>
-  <testcase name="contextLoads()" classname="com.example.stockanalyzer.marketdata.StockAnalyzerMarketDataApplicationTests" time="0.232"/>
-  <system-out><![CDATA[02:38:47.054 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.stockanalyzer.marketdata.StockAnalyzerMarketDataApplicationTests]: StockAnalyzerMarketDataApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-02:38:47.089 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.stockanalyzer.marketdata.StockAnalyzerMarketDataApplication for test class com.example.stockanalyzer.marketdata.StockAnalyzerMarketDataApplicationTests
+  <testcase name="contextLoads()" classname="com.example.stockanalyzer.marketdata.StockAnalyzerMarketDataApplicationTests" time="0.002"/>
+  <system-out><![CDATA[03:02:51.163 INFO  [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.example.stockanalyzer.marketdata.StockAnalyzerMarketDataApplicationTests]: StockAnalyzerMarketDataApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+03:02:51.163 INFO  [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.example.stockanalyzer.marketdata.StockAnalyzerMarketDataApplication for test class com.example.stockanalyzer.marketdata.StockAnalyzerMarketDataApplicationTests
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -14,7 +14,7 @@
 
  :: Spring Boot ::                (v4.0.1)
 
-02:38:47.230 WARN  [    Test worker] ory$DuplicateJsonObjectContextCustomizer : 
+03:02:51.173 WARN  [    Test worker] ory$DuplicateJsonObjectContextCustomizer : 
 
 Found multiple occurrences of org.json.JSONObject on the class path:
 
@@ -23,18 +23,17 @@ Found multiple occurrences of org.json.JSONObject on the class path:
 
 You may wish to exclude one of them to ensure predictable runtime behavior
 
-02:38:47.236 INFO  [    Test worker] .StockAnalyzerMarketDataApplicationTests : Starting StockAnalyzerMarketDataApplicationTests using Java 21.0.8 with PID 68562 (started by arpitchauhan in /Users/arpitchauhan/Desktop/Projects/Java/market-data-ingestion-service)
-02:38:47.236 INFO  [    Test worker] .StockAnalyzerMarketDataApplicationTests : The following 1 profile is active: "test"
-02:38:47.575 INFO  [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-02:38:47.627 INFO  [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 49 ms. Found 5 JPA repository interfaces.
-02:38:47.815 INFO  [    Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-02:38:47.831 INFO  [    Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.0.Final
-02:38:47.980 INFO  [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-02:38:47.994 INFO  [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-02:38:48.048 INFO  [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
-02:38:48.049 INFO  [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-02:38:48.056 WARN  [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-02:38:48.064 INFO  [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+03:02:51.173 INFO  [    Test worker] .StockAnalyzerMarketDataApplicationTests : Starting StockAnalyzerMarketDataApplicationTests using Java 21.0.8 with PID 71578 (started by arpitchauhan in /Users/arpitchauhan/Desktop/Projects/Java/market-data-ingestion-service)
+03:02:51.173 INFO  [    Test worker] .StockAnalyzerMarketDataApplicationTests : The following 1 profile is active: "test"
+03:02:51.247 INFO  [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+03:02:51.253 INFO  [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 7 JPA repository interfaces.
+03:02:51.287 INFO  [    Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+03:02:51.294 INFO  [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+03:02:51.294 INFO  [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+03:02:51.295 INFO  [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:testdb user=SA
+03:02:51.295 INFO  [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+03:02:51.295 WARN  [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+03:02:51.295 INFO  [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [jdbc:h2:mem:testdb]
 	Database driver: H2 JDBC Driver
 	Database dialect: H2Dialect
@@ -46,44 +45,19 @@ You may wish to exclude one of them to ensure predictable runtime behavior
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-02:38:48.383 INFO  [    Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-02:38:48.390 DEBUG [    Test worker] org.hibernate.SQL                        : drop table if exists broker_sessions cascade 
-02:38:48.390 DEBUG [    Test worker] org.hibernate.SQL                        : drop table if exists candles cascade 
-02:38:48.391 DEBUG [    Test worker] org.hibernate.SQL                        : drop table if exists data_sources cascade 
-02:38:48.391 DEBUG [    Test worker] org.hibernate.SQL                        : drop table if exists exchange cascade 
-02:38:48.391 DEBUG [    Test worker] org.hibernate.SQL                        : drop table if exists instrument cascade 
-02:38:48.392 DEBUG [    Test worker] org.hibernate.SQL                        : create table broker_sessions (created_at timestamp(6) with time zone not null, data_source_id bigint not null, expires_at timestamp(6) with time zone, id bigint generated by default as identity, login_time timestamp(6) with time zone not null, updated_at timestamp(6) with time zone not null, broker_user_id varchar(100), access_token varchar(2000) not null, refresh_token varchar(2000), status enum ('ACTIVE','EXPIRED','REVOKED') not null, primary key (id))
-02:38:48.396 DEBUG [    Test worker] org.hibernate.SQL                        : create table candles (close_price numeric(19,4) not null, high_price numeric(19,4) not null, low_price numeric(19,4) not null, open_price numeric(19,4) not null, vwap numeric(19,4), candle_end timestamp(6) with time zone not null, candle_start timestamp(6) with time zone not null, created_at timestamp(6) with time zone not null, id bigint generated by default as identity, instrument_id bigint not null, trade_count bigint, updated_at timestamp(6) with time zone not null, volume bigint not null, interval_type enum ('FIFTEEN_MINUTE','FIVE_MINUTE','ONE_DAY','ONE_HOUR','ONE_MINUTE','THIRTY_MINUTE') not null, primary key (id))
-02:38:48.396 DEBUG [    Test worker] org.hibernate.SQL                        : create table data_sources (is_active boolean not null, priority integer, rate_limit_per_day integer, rate_limit_per_minute integer, timeout_seconds integer, created_at timestamp(6) with time zone not null, id bigint generated by default as identity, updated_at timestamp(6) with time zone not null, description varchar(1000), api_endpoint varchar(255) not null, api_key varchar(255), api_secret varchar(255), name varchar(255) not null unique, provider_type enum ('FYERS','GROWW','KITE','UPSTOX') not null, primary key (id))
-02:38:48.397 DEBUG [    Test worker] org.hibernate.SQL                        : create table exchange (is_active boolean not null, close_time timestamp(6) not null, created_at timestamp(6) with time zone not null, id bigint generated by default as identity, open_time timestamp(6) not null, updated_at timestamp(6) with time zone not null, currency varchar(10) not null, code varchar(50) not null unique, timezone varchar(50) not null, country varchar(100) not null, name varchar(255) not null, primary key (id))
-02:38:48.398 DEBUG [    Test worker] org.hibernate.SQL                        : create table instrument (is_active boolean not null, created_at timestamp(6) with time zone not null, exchange_id bigint not null, id bigint generated by default as identity, kite_instrument_token bigint, updated_at timestamp(6) with time zone not null, series varchar(20), segment varchar(50) not null, symbol varchar(50) not null, name varchar(255) not null, instrument_type enum ('COMMODITy','EQUITY','ETF','FUTURE','INDEX','OPTION') not null, primary key (id))
-02:38:48.399 DEBUG [    Test worker] org.hibernate.SQL                        : alter table if exists broker_sessions add constraint FK88r3256krj0r5w5kiuct145xn foreign key (data_source_id) references data_sources
-02:38:48.403 DEBUG [    Test worker] org.hibernate.SQL                        : alter table if exists candles add constraint FKgfrinfu352i8j4ocsowanixc1 foreign key (instrument_id) references instrument
-02:38:48.404 DEBUG [    Test worker] org.hibernate.SQL                        : alter table if exists instrument add constraint FK1tu0axot29pb68c9f7tlboona foreign key (exchange_id) references exchange
-02:38:48.405 INFO  [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-02:38:48.441 INFO  [    Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-02:38:48.839 WARN  [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-02:38:48.847 INFO  [    Test worker] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
-02:38:48.886 WARN  [    Test worker] .s.a.UserDetailsServiceAutoConfiguration : 
-
-Using generated security password: d50cfa3b-b74a-4346-9785-a61f9eeec03b
-
-This generated password is for development use only. Your security configuration must be updated before running your application in production.
-
-02:38:48.888 INFO  [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
-02:38:49.160 INFO  [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
-02:38:49.180 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-02:38:49.180 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@768a4fe]]
-02:38:49.181 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-02:38:49.190 INFO  [    Test worker] .StockAnalyzerMarketDataApplicationTests : Started StockAnalyzerMarketDataApplicationTests in 2.056 seconds (process running for 2.49)
-02:38:49.456 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
-02:38:49.456 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@768a4fe]]
-02:38:49.456 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+03:02:51.317 INFO  [    Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+03:02:51.324 INFO  [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+03:02:51.384 WARN  [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+03:02:51.387 INFO  [    Test worker] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+03:02:51.395 INFO  [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsService
+03:02:51.477 INFO  [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+03:02:51.483 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+03:02:51.483 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2a240b03]]
+03:02:51.483 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+03:02:51.485 INFO  [    Test worker] .StockAnalyzerMarketDataApplicationTests : Started StockAnalyzerMarketDataApplicationTests in 0.32 seconds (process running for 3.607)
+03:02:51.488 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+03:02:51.488 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2a240b03]]
+03:02:51.488 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
 ]]></system-out>
-  <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
-WARNING: A Java agent has been loaded dynamically (/private/var/folders/h6/kcwr1n4n7mj_488x7w0gkf_m0000gn/T/cursor-sandbox-cache/9db437cce68127a85ff9062ec263fa6f/gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.17.8/f09415827a71be7ed621c7bd02550678f28bc81c/byte-buddy-agent-1.17.8.jar)
-WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
-WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
-WARNING: Dynamic loading of agents will be disallowed by default in a future release
-]]></system-err>
+  <system-err><![CDATA[]]></system-err>
 </testsuite>

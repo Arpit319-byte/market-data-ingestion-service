@@ -10,6 +10,7 @@ import java.util.Map;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
+import com.example.stockanalyzer.marketdata.auth.KiteCredentials;
 import com.example.stockanalyzer.marketdata.entities.BrokerSession;
 import com.example.stockanalyzer.marketdata.entities.DataSource;
 import com.example.stockanalyzer.marketdata.entities.Instrument;
@@ -38,6 +39,7 @@ public class KiteLiveMarketDataStream implements MarketDataStream {
 
     private final BrokerSessionService brokerSessionService;
     private final TradeTickListener tradeTickListener;
+    private final KiteCredentials kiteCredentials;
     private final Object lock = new Object();
 
     private KiteTicker ticker;
@@ -53,9 +55,7 @@ public class KiteLiveMarketDataStream implements MarketDataStream {
 
     @Override
     public void start(DataSource dataSource, List<Instrument> instruments) {
-        if (dataSource.getApiKey() == null || dataSource.getApiKey().isBlank()) {
-            throw new MarketDataException("Kite API key is missing for data source: " + dataSource.getName());
-        }
+        String apiKey = kiteCredentials.apiKey(dataSource);
 
         ArrayList<Long> tokens = new ArrayList<>();
         Map<Long, Instrument> tokenIndex = new HashMap<>();
@@ -87,7 +87,7 @@ public class KiteLiveMarketDataStream implements MarketDataStream {
             disconnectQuietly();
             instrumentsByToken = Map.copyOf(tokenIndex);
 
-            KiteTicker connection = new KiteTicker(session.getAccessToken(), dataSource.getApiKey());
+            KiteTicker connection = new KiteTicker(session.getAccessToken(), apiKey);
             connection.setTryReconnection(true);
             try {
                 connection.setMaximumRetries(10);

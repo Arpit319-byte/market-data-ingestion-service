@@ -27,6 +27,7 @@ public class KiteAuthService implements ProviderAuthService {
 
     private final KiteClientFactory kiteClientFactory;
     private final BrokerSessionService brokerSessionService;
+    private final KiteCredentials kiteCredentials;
 
     @Override
     public boolean supports(DataSource dataSource) {
@@ -68,7 +69,7 @@ public class KiteAuthService implements ProviderAuthService {
         if (!supports(dataSource)) {
             throw new AuthenticationException("Unsupported data source for Kite auth: " + dataSource.getName());
         }
-        User user = completeKiteLogin(dataSource, requestToken, dataSource.getApiSecret());
+        User user = completeKiteLogin(dataSource, requestToken, kiteCredentials.apiSecret(dataSource));
         return new AuthLoginResponse(
                 dataSource.getId(),
                 dataSource.getProviderType(),
@@ -100,7 +101,7 @@ public class KiteAuthService implements ProviderAuthService {
 
         try {
             KiteConnect kiteConnect = kiteClientFactory.createAuthenticated(dataSource);
-            TokenSet tokenSet = kiteConnect.renewAccessToken(refreshToken, dataSource.getApiSecret());
+            TokenSet tokenSet = kiteConnect.renewAccessToken(refreshToken, kiteCredentials.apiSecret(dataSource));
             saveSession(dataSource, tokenSet.userId, tokenSet.accessToken, tokenSet.refreshToken);
             log.info("Kite access token renewed for user {}", tokenSet.userId);
         } catch (KiteException | JSONException | java.io.IOException e) {

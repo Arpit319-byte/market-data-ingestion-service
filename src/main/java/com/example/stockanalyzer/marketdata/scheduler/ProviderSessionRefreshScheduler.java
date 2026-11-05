@@ -4,6 +4,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import com.example.stockanalyzer.marketdata.auth.ProviderAuthRegistry;
 import com.example.stockanalyzer.marketdata.repository.DataSourceRepository;
+import com.example.stockanalyzer.marketdata.service.ClusterLeaderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,9 +15,13 @@ public class ProviderSessionRefreshScheduler {
 
     private final DataSourceRepository dataSourceRepository;
     private final ProviderAuthRegistry providerAuthRegistry;
+    private final ClusterLeaderService clusterLeaderService;
 
     @Scheduled(cron = "${provider.scheduler.session-refresh-cron:0 30 8 * * MON-FRI}", zone = "Asia/Kolkata")
     public void fetchData() {
+        if (!clusterLeaderService.isLeader()) {
+            return;
+        }
         dataSourceRepository.findByIsActiveTrueOrderByPriorityAsc().forEach(dataSource -> {
             try {
                 providerAuthRegistry.resolve(dataSource).refreshSession(dataSource);

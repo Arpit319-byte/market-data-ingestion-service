@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - ProductionReadinessTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>ProductionReadinessTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.example.stockanalyzer.marketdata.html">com.example.stockanalyzer.marketdata</a> &gt; ProductionReadinessTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">4</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.450s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a href="#">Tests</a>
+</li>
+<li>
+<a href="#">Standard output</a>
+</li>
+<li>
+<a href="#">Standard error</a>
+</li>
+</ul>
+<div class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">aSecondBackfillIsRejectedWhileTheFirstIsActive()</td>
+<td class="success">0.019s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">apiRequiresAKeyAndLeavesHealthAndTheLoginCallbackOpen()</td>
+<td class="success">0.378s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">backfillRequestIsAcceptedWithoutWaitingForTheDownload()</td>
+<td class="success">0.009s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">onlyOneInstanceHoldsClusterLeadership()</td>
+<td class="success">0.044s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre id="class-stdout">03:02:48.223 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.stockanalyzer.marketdata.ProductionReadinessTest]: ProductionReadinessTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+03:02:48.261 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.stockanalyzer.marketdata.StockAnalyzerMarketDataApplication for test class com.example.stockanalyzer.marketdata.ProductionReadinessTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.0.1)
+
+03:02:48.395 WARN  [    Test worker] ory$DuplicateJsonObjectContextCustomizer : 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/private/var/folders/h6/kcwr1n4n7mj_488x7w0gkf_m0000gn/T/cursor-sandbox-cache/9db437cce68127a85ff9062ec263fa6f/gradle/caches/modules-2/files-2.1/org.json/json/20230227/7a0d4aca76513d8ce81f9b044ce8126b84809ad8/json-20230227.jar!/org/json/JSONObject.class
+	jar:file:/private/var/folders/h6/kcwr1n4n7mj_488x7w0gkf_m0000gn/T/cursor-sandbox-cache/9db437cce68127a85ff9062ec263fa6f/gradle/caches/modules-2/files-2.1/com.vaadin.external.google/android-json/0.0.20131108.vaadin1/fa26d351fe62a6a17f5cda1287c1c6110dec413f/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+03:02:48.398 INFO  [    Test worker] c.e.s.m.ProductionReadinessTest          : Starting ProductionReadinessTest using Java 21.0.8 with PID 71578 (started by arpitchauhan in /Users/arpitchauhan/Desktop/Projects/Java/market-data-ingestion-service)
+03:02:48.398 INFO  [    Test worker] c.e.s.m.ProductionReadinessTest          : The following 1 profile is active: &quot;test&quot;
+03:02:48.751 INFO  [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+03:02:48.807 INFO  [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 51 ms. Found 7 JPA repository interfaces.
+03:02:48.996 INFO  [    Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+03:02:49.018 INFO  [    Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.0.Final
+03:02:49.174 INFO  [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+03:02:49.188 INFO  [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+03:02:49.245 INFO  [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+03:02:49.246 INFO  [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+03:02:49.255 WARN  [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+03:02:49.263 INFO  [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:h2:mem:testdb]
+	Database driver: H2 JDBC Driver
+	Database dialect: H2Dialect
+	Database version: 2.4.240
+	Default catalog/schema: TESTDB/PUBLIC
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: 100
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+03:02:49.615 INFO  [    Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+03:02:49.636 INFO  [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+03:02:49.672 INFO  [    Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+03:02:50.280 WARN  [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+03:02:50.288 INFO  [    Test worker] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+03:02:50.336 INFO  [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsService
+03:02:50.625 INFO  [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+03:02:50.626 INFO  [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+03:02:50.628 INFO  [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+03:02:50.633 INFO  [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 7 ms
+03:02:50.653 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+03:02:50.653 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@38371a7e]]
+03:02:50.653 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+03:02:50.662 INFO  [    Test worker] c.e.s.m.ProductionReadinessTest          : Started ProductionReadinessTest in 2.36 seconds (process running for 2.784)
+03:02:51.020 WARN  [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'request_token' for method parameter type String is not present]
+03:02:51.128 WARN  [    Test worker] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 23505, SQLState: 23505
+03:02:51.129 WARN  [    Test worker] org.hibernate.orm.jdbc.error             : Unique index or primary key violation: &quot;PUBLIC.UK_BACKGROUND_JOBS_ACTIVE_KEY INDEX PUBLIC.UK_BACKGROUND_JOBS_ACTIVE_KEY_INDEX_9 ON PUBLIC.BACKGROUND_JOBS(ACTIVE_KEY NULLS FIRST) VALUES ( /* 1 */ 'CANDLE_BACKFILL' )&quot;; SQL statement:
+insert into background_jobs (active_key,created_at,daily_days,finished_at,job_type,message,minute_days,saved_count,started_at,status,updated_at,id) values (?,?,?,?,?,?,?,?,?,?,?,default) [23505-240]
+03:02:51.159 ERROR [ackground-job-1] c.e.s.m.service.CandleBackfillRunner     : Candle backfill job 3 failed
+com.example.stockanalyzer.marketdata.exception.MarketDataException: No active data source configured
+	at com.example.stockanalyzer.marketdata.service.CandleIngestionService.lambda$activeDataSource$2(CandleIngestionService.java:68)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at com.example.stockanalyzer.marketdata.service.CandleIngestionService.activeDataSource(CandleIngestionService.java:68)
+	at com.example.stockanalyzer.marketdata.service.CandleIngestionService.fetchRange(CandleIngestionService.java:45)
+	at com.example.stockanalyzer.marketdata.service.HistoricalCandleService.backfill(HistoricalCandleService.java:27)
+	at com.example.stockanalyzer.marketdata.service.CandleBackfillRunner.run(CandleBackfillRunner.java:23)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:112)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+03:02:51.161 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+03:02:51.161 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@38371a7e]]
+03:02:51.162 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+</pre>
+<button class="clipboard-copy-btn" aria-label="Copy to clipboard" data-copy-element-id="class-stdout">Copy</button>
+</span>
+</div>
+<div class="tab">
+<h2>Standard error</h2>
+<span class="code">
+<pre id="class-stderr">Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (/private/var/folders/h6/kcwr1n4n7mj_488x7w0gkf_m0000gn/T/cursor-sandbox-cache/9db437cce68127a85ff9062ec263fa6f/gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.17.8/f09415827a71be7ed621c7bd02550678f28bc81c/byte-buddy-agent-1.17.8.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+</pre>
+<button class="clipboard-copy-btn" aria-label="Copy to clipboard" data-copy-element-id="class-stderr">Copy</button>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="https://www.gradle.org">Gradle 9.2.1</a> at 06-Nov-2026, 3:02:51 am</p>
+</div>
+</div>
+</body>
+</html>
