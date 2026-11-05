@@ -2,19 +2,21 @@ package com.example.stockanalyzer.marketdata.service;
 
 import java.time.Instant;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+
 import com.example.stockanalyzer.marketdata.dto.FetchCandlesRequest;
-import com.example.stockanalyzer.marketdata.entites.Candle;
-import com.example.stockanalyzer.marketdata.entites.DataSource;
-import com.example.stockanalyzer.marketdata.entites.Instrument;
-import com.example.stockanalyzer.marketdata.entites.IntervalType;
+import com.example.stockanalyzer.marketdata.entities.DataSource;
+import com.example.stockanalyzer.marketdata.entities.Instrument;
+import com.example.stockanalyzer.marketdata.entities.IntervalType;
 import com.example.stockanalyzer.marketdata.exception.MarketDataException;
 import com.example.stockanalyzer.marketdata.provider.MarketDataProvider;
 import com.example.stockanalyzer.marketdata.provider.MarketDataProviderRegistry;
-import com.example.stockanalyzer.marketdata.repository.CandleRepository;
 import com.example.stockanalyzer.marketdata.repository.DataSourceRepository;
 import com.example.stockanalyzer.marketdata.repository.InstrumentRepository;
+import com.example.stockanalyzer.marketdata.stream.CandleStore;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,59 +27,56 @@ public class CandleIngestionService {
 
     private final DataSourceRepository dataSourceRepository;
     private final InstrumentRepository instrumentRepository;
-    private final CandleRepository candleRepository;
     private final MarketDataProviderRegistry providerRegistry;
+    private final CandleStore candleStore;
 
-    @Transactional
+    @Value("${kite.backfill.delay-ms:350}")
+    private long providerDelayMs;
+
     public int fetchAndSave(FetchCandlesRequest request) {
         DataSource dataSource = dataSourceRepository.findById(request.getDataSourceId())
                 .orElseThrow(() -> new MarketDataException("Data source not found: " + request.getDataSourceId()));
         Instrument instrument = instrumentRepository.findById(request.getInstrumentId())
                 .orElseThrow(() -> new MarketDataException("Instrument not found: " + request.getInstrumentId()));
-
-        MarketDataProvider provider = providerRegistry.resolve(dataSource);
-        List<Candle> candles = provider.fetchCandles(dataSource, instrument, request);
-        return saveNewCandles(candles);
+        return fetchOne(dataSource, instrument, request);
     }
 
-    @Transactional
-    public int fetchAndSaveForActiveInstruments(IntervalType intervalType) {
-        DataSource dataSource = dataSourceRepository.findByIsActiveTrueOrderByPriorityAsc().stream()
-                .findFirst()
-                .orElseThrow(() -> new MarketDataException("No active data source configured"));
-        MarketDataProvider provider = providerRegistry.resolve(dataSource);
-
-        Instant to = Instant.now();
-        Instant from = to.minusSeconds(intervalType.getMinutes() * 60L * 3L);
+    public int fetchRange(IntervalType intervalType, Instant from, Instant to) {
+        DataSource dataSource = activeDataSource();
         int saved = 0;
-
         for (Instrument instrument : instrumentRepository.findByIsActiveTrueAndKiteInstrumentTokenIsNotNull()) {
-            FetchCandlesRequest request = new FetchCandlesRequest(
+            saved += fetchOne(dataSource, instrument, new FetchCandlesRequest(
                     instrument.getId(),
                     dataSource.getId(),
                     intervalType,
                     from,
-                    to);
-            saved += saveNewCandles(provider.fetchCandles(dataSource, instrument, request));
+                    to));
+            pause();
         }
-
-        log.info("Saved {} new candles for interval {}", saved, intervalType);
+        log.info("Saved {} candles for interval {} between {} and {}", saved, intervalType, from, to);
         return saved;
     }
 
-    private int saveNewCandles(List<Candle> candles) {
-        int saved = 0;
-        for (Candle candle : candles) {
-            boolean exists = candleRepository.findByInstrumentIdAndIntervalTypeAndCandleStart(
-                    candle.getInstrument().getId(),
-                    candle.getIntervalType(),
-                    candle.getCandleStart()).isPresent();
+    private int fetchOne(DataSource dataSource, Instrument instrument, FetchCandlesRequest request) {
+        MarketDataProvider provider = providerRegistry.resolve(dataSource);
+        return candleStore.save(provider.fetchCandles(dataSource, instrument, request));
+    }
 
-            if (!exists) {
-                candleRepository.save(candle);
-                saved++;
-            }
+    private DataSource activeDataSource() {
+        return dataSourceRepository.findByIsActiveTrueOrderByPriorityAsc().stream()
+                .findFirst()
+                .orElseThrow(() -> new MarketDataException("No active data source configured"));
+    }
+
+    private void pause() {
+        if (providerDelayMs <= 0) {
+            return;
         }
-        return saved;
+        try {
+            Thread.sleep(providerDelayMs);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            throw new MarketDataException("Candle fetch was interrupted", e);
+        }
     }
 }
