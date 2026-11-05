@@ -21,7 +21,7 @@ public class IntradayCandleIngestionScheduler {
     @Scheduled(cron = "${kite.scheduler.intraday-cron:0 */5 9-15 * * MON-FRI}", zone = "Asia/Kolkata")
     public void fetchIntradayCandles() {
         try {
-            candleIngestionService.fetchAndSaveForActiveInstruments(IntervalType.FIVE_MINUTE);
+            candleIngestionService.fetchAndSaveForActiveInstruments(IntervalType.ONE_MINUTE);
         } catch (Exception e) {
             log.error("Intraday candle ingestion failed", e);
         }
