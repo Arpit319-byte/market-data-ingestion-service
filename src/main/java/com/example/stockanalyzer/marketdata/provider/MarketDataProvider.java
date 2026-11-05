@@ -13,8 +13,5 @@ public interface MarketDataProvider {
 
     String getProviderName();
 
-    List<Candle> fetchCandles(
-            DataSource dataSource,
-            Instrument instrument,
-            FetchCandlesRequest request);
+    List<Candle> fetchCandles(DataSource dataSource,Instrument instrument,FetchCandlesRequest request);
 }
