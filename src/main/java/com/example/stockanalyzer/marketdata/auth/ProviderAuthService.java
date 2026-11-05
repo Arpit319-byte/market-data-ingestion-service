@@ -1,6 +1,6 @@
 package com.example.stockanalyzer.marketdata.auth;
 
-import com.example.stockanalyzer.marketdata.entites.DataSource;
+import com.example.stockanalyzer.marketdata.entities.DataSource;
 import com.example.stockanalyzer.marketdata.dto.AuthLoginResponse;
 
 public interface ProviderAuthService {

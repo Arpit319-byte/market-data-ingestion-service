@@ -2,8 +2,8 @@ package com.example.stockanalyzer.marketdata.dto;
 
 import java.time.Instant;
 
-import com.example.stockanalyzer.marketdata.entites.Instrument;
-import com.example.stockanalyzer.marketdata.entites.InstrumentType;
+import com.example.stockanalyzer.marketdata.entities.Instrument;
+import com.example.stockanalyzer.marketdata.entities.InstrumentType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

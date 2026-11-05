@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.stockanalyzer.marketdata.entites.DataSource;
+import com.example.stockanalyzer.marketdata.entities.DataSource;
 
 public interface DataSourceRepository extends JpaRepository<DataSource, Long> {
 

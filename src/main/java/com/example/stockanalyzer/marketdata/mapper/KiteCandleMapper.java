@@ -7,9 +7,9 @@ import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
-import com.example.stockanalyzer.marketdata.entites.Candle;
-import com.example.stockanalyzer.marketdata.entites.Instrument;
-import com.example.stockanalyzer.marketdata.entites.IntervalType;
+import com.example.stockanalyzer.marketdata.entities.Candle;
+import com.example.stockanalyzer.marketdata.entities.Instrument;
+import com.example.stockanalyzer.marketdata.entities.IntervalType;
 import com.zerodhatech.models.HistoricalData;
 
 public final class KiteCandleMapper {

@@ -1,8 +1,8 @@
 package com.example.stockanalyzer.marketdata.auth;
 
 import org.springframework.stereotype.Component;
-import com.example.stockanalyzer.marketdata.entites.BrokerSession;
-import com.example.stockanalyzer.marketdata.entites.DataSource;
+import com.example.stockanalyzer.marketdata.entities.BrokerSession;
+import com.example.stockanalyzer.marketdata.entities.DataSource;
 import com.example.stockanalyzer.marketdata.exception.AuthenticationException;
 import com.example.stockanalyzer.marketdata.service.BrokerSessionService;
 import com.zerodhatech.kiteconnect.KiteConnect;

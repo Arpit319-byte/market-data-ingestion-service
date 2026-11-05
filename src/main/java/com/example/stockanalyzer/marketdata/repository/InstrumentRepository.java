@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.stockanalyzer.marketdata.entites.Instrument;
+import com.example.stockanalyzer.marketdata.entities.Instrument;
 
 public interface InstrumentRepository extends JpaRepository<Instrument, Long> {
 

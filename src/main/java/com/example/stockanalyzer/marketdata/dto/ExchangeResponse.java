@@ -2,7 +2,7 @@ package com.example.stockanalyzer.marketdata.dto;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import com.example.stockanalyzer.marketdata.entites.Exchange;
+import com.example.stockanalyzer.marketdata.entities.Exchange;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -2,7 +2,7 @@ package com.example.stockanalyzer.marketdata.mapper;
 
 import java.time.Instant;
 
-import com.example.stockanalyzer.marketdata.entites.IntervalType;
+import com.example.stockanalyzer.marketdata.entities.IntervalType;
 
 public final class KiteIntervalMapper {
 

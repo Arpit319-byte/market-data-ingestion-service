@@ -3,9 +3,9 @@ package com.example.stockanalyzer.marketdata.provider;
 import java.util.List;
 
 import com.example.stockanalyzer.marketdata.dto.FetchCandlesRequest;
-import com.example.stockanalyzer.marketdata.entites.Candle;
-import com.example.stockanalyzer.marketdata.entites.DataSource;
-import com.example.stockanalyzer.marketdata.entites.Instrument;
+import com.example.stockanalyzer.marketdata.entities.Candle;
+import com.example.stockanalyzer.marketdata.entities.DataSource;
+import com.example.stockanalyzer.marketdata.entities.Instrument;
 
 public interface MarketDataProvider {
 

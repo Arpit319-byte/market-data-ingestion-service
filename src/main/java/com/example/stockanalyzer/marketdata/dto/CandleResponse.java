@@ -2,8 +2,8 @@ package com.example.stockanalyzer.marketdata.dto;
 
 import java.math.BigDecimal;
 import java.time.Instant;
-import com.example.stockanalyzer.marketdata.entites.Candle;
-import com.example.stockanalyzer.marketdata.entites.IntervalType;
+import com.example.stockanalyzer.marketdata.entities.Candle;
+import com.example.stockanalyzer.marketdata.entities.IntervalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

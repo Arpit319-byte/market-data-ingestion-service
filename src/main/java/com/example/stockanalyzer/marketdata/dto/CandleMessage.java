@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 
 
-import com.example.stockanalyzer.marketdata.entites.IntervalType;
+import com.example.stockanalyzer.marketdata.entities.IntervalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
