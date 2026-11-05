@@ -12,7 +12,7 @@ import com.example.stockanalyzer.marketdata.dto.CandleResponse;
 import com.example.stockanalyzer.marketdata.entities.Candle;
 import com.example.stockanalyzer.marketdata.entities.Instrument;
 import com.example.stockanalyzer.marketdata.entities.IntervalType;
-import com.example.stockanalyzer.marketdata.exception.MarketDataException;
+import com.example.stockanalyzer.marketdata.exception.NotFoundException;
 import com.example.stockanalyzer.marketdata.repository.CandleRepository;
 import com.example.stockanalyzer.marketdata.repository.InstrumentRepository;
 
@@ -28,7 +28,7 @@ public class CandleQueryService {
     @Transactional(readOnly = true)
     public List<CandleResponse> query(Long instrumentId, CandleQueryRequest request) {
         Instrument instrument = instrumentRepository.findById(instrumentId)
-                .orElseThrow(() -> new MarketDataException("Instrument not found: " + instrumentId));
+                .orElseThrow(() -> new NotFoundException("Instrument not found: " + instrumentId));
         IntervalType intervalType = request.getIntervalType() == null ? IntervalType.ONE_MINUTE : request.getIntervalType();
         Instant to = request.getTo() == null ? Instant.now() : request.getTo();
         Instant from = request.getFrom() == null ? to.minus(1, ChronoUnit.DAYS) : request.getFrom();

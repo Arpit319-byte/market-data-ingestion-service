@@ -4,7 +4,7 @@ package com.example.stockanalyzer.marketdata.controller;
 import com.example.stockanalyzer.marketdata.auth.ProviderAuthRegistry;
 import com.example.stockanalyzer.marketdata.dto.AuthLoginResponse;
 import com.example.stockanalyzer.marketdata.entities.DataSource;
-import com.example.stockanalyzer.marketdata.exception.MarketDataException;
+import com.example.stockanalyzer.marketdata.exception.NotFoundException;
 import com.example.stockanalyzer.marketdata.repository.DataSourceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -56,7 +56,7 @@ public class AuthController {
 
     private DataSource getDataSource(Long dataSourceId) {
         return dataSourceRepository.findById(dataSourceId)
-                .orElseThrow(() -> new MarketDataException("Data source not found: " + dataSourceId));
+                .orElseThrow(() -> new NotFoundException("Data source not found: " + dataSourceId));
     }
 
 }

@@ -4,6 +4,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.example.stockanalyzer.marketdata.logging.IncidentContext;
 import com.example.stockanalyzer.marketdata.service.ClusterLeaderService;
 import com.example.stockanalyzer.marketdata.service.LiveMarketStreamService;
 
@@ -20,21 +21,27 @@ public class LiveMarketStreamScheduler {
     @Scheduled(cron = "${kite.stream.start-cron:0 14 9 * * MON-FRI}", zone = "Asia/Kolkata")
     public void startStream() {
         if (clusterLeaderService.isLeader()) {
-            liveMarketStreamService.start();
+            try (IncidentContext ignored = IncidentContext.open("stream-start")) {
+                liveMarketStreamService.start();
+            }
         }
     }
 
     @Scheduled(cron = "${kite.stream.stop-cron:0 31 15 * * MON-FRI}", zone = "Asia/Kolkata")
     public void stopStream() {
         if (clusterLeaderService.isLeader()) {
-            liveMarketStreamService.stop();
+            try (IncidentContext ignored = IncidentContext.open("stream-stop")) {
+                liveMarketStreamService.stop();
+            }
         }
     }
 
     @Scheduled(cron = "${kite.stream.flush-cron:5 * 9-15 * * MON-FRI}", zone = "Asia/Kolkata")
     public void flushClosedCandles() {
         if (clusterLeaderService.isLeader()) {
-            liveMarketStreamService.flushClosedCandles();
+            try (IncidentContext ignored = IncidentContext.open("stream-flush")) {
+                liveMarketStreamService.flushClosedCandles();
+            }
         }
     }
 }

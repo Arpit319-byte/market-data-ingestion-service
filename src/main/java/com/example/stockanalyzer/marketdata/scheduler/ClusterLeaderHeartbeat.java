@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.example.stockanalyzer.marketdata.logging.IncidentContext;
 import com.example.stockanalyzer.marketdata.service.ClusterLeaderService;
 import com.example.stockanalyzer.marketdata.service.LiveMarketStreamService;
 import com.example.stockanalyzer.marketdata.stream.MarketSession;
@@ -24,6 +25,12 @@ public class ClusterLeaderHeartbeat {
 
     @Scheduled(fixedDelayString = "${app.cluster.heartbeat-ms:20000}")
     public void beat() {
+        try (IncidentContext ignored = IncidentContext.open("cluster-heartbeat")) {
+            beatAsLeader();
+        }
+    }
+
+    private void beatAsLeader() {
         boolean leader = clusterLeaderService.renew();
         LiveMarketStreamService stream = liveMarketStreamService.getIfAvailable();
         if (stream == null) {

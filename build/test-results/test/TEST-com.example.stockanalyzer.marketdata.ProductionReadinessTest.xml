@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.stockanalyzer.marketdata.ProductionReadinessTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2026-11-05T21:32:50.692Z" hostname="Arpits-MacBook-Air.local" time="0.452">
+<testsuite name="com.example.stockanalyzer.marketdata.ProductionReadinessTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-05T21:46:19.020Z" hostname="Arpits-MacBook-Air.local" time="0.482">
   <properties/>
-  <testcase name="apiRequiresAKeyAndLeavesHealthAndTheLoginCallbackOpen()" classname="com.example.stockanalyzer.marketdata.ProductionReadinessTest" time="0.378"/>
-  <testcase name="onlyOneInstanceHoldsClusterLeadership()" classname="com.example.stockanalyzer.marketdata.ProductionReadinessTest" time="0.044"/>
-  <testcase name="aSecondBackfillIsRejectedWhileTheFirstIsActive()" classname="com.example.stockanalyzer.marketdata.ProductionReadinessTest" time="0.019"/>
+  <testcase name="apiRequiresAKeyAndLeavesHealthAndTheLoginCallbackOpen()" classname="com.example.stockanalyzer.marketdata.ProductionReadinessTest" time="0.386"/>
+  <testcase name="onlyOneInstanceHoldsClusterLeadership()" classname="com.example.stockanalyzer.marketdata.ProductionReadinessTest" time="0.038"/>
+  <testcase name="aSecondBackfillIsRejectedWhileTheFirstIsActive()" classname="com.example.stockanalyzer.marketdata.ProductionReadinessTest" time="0.016"/>
   <testcase name="backfillRequestIsAcceptedWithoutWaitingForTheDownload()" classname="com.example.stockanalyzer.marketdata.ProductionReadinessTest" time="0.009"/>
-  <system-out><![CDATA[03:02:48.223 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.stockanalyzer.marketdata.ProductionReadinessTest]: ProductionReadinessTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-03:02:48.261 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.stockanalyzer.marketdata.StockAnalyzerMarketDataApplication for test class com.example.stockanalyzer.marketdata.ProductionReadinessTest
+  <testcase name="requestErrorsUseTheApiErrorBody()" classname="com.example.stockanalyzer.marketdata.ProductionReadinessTest" time="0.031"/>
+  <system-out><![CDATA[03:16:16.484 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.example.stockanalyzer.marketdata.ProductionReadinessTest]: ProductionReadinessTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+03:16:16.526 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.example.stockanalyzer.marketdata.StockAnalyzerMarketDataApplication for test class com.example.stockanalyzer.marketdata.ProductionReadinessTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -17,7 +18,7 @@
 
  :: Spring Boot ::                (v4.0.1)
 
-03:02:48.395 WARN  [    Test worker] ory$DuplicateJsonObjectContextCustomizer : 
+2026-11-06T03:16:16.670+05:30 WARN  [] [] [] [    Test worker] ory$DuplicateJsonObjectContextCustomizer : 
 
 Found multiple occurrences of org.json.JSONObject on the class path:
 
@@ -26,18 +27,18 @@ Found multiple occurrences of org.json.JSONObject on the class path:
 
 You may wish to exclude one of them to ensure predictable runtime behavior
 
-03:02:48.398 INFO  [    Test worker] c.e.s.m.ProductionReadinessTest          : Starting ProductionReadinessTest using Java 21.0.8 with PID 71578 (started by arpitchauhan in /Users/arpitchauhan/Desktop/Projects/Java/market-data-ingestion-service)
-03:02:48.398 INFO  [    Test worker] c.e.s.m.ProductionReadinessTest          : The following 1 profile is active: "test"
-03:02:48.751 INFO  [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-03:02:48.807 INFO  [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 51 ms. Found 7 JPA repository interfaces.
-03:02:48.996 INFO  [    Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
-03:02:49.018 INFO  [    Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.0.Final
-03:02:49.174 INFO  [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-03:02:49.188 INFO  [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-03:02:49.245 INFO  [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
-03:02:49.246 INFO  [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-03:02:49.255 WARN  [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-03:02:49.263 INFO  [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-11-06T03:16:16.672+05:30 INFO  [] [] [] [    Test worker] c.e.s.m.ProductionReadinessTest          : Starting ProductionReadinessTest using Java 21.0.8 with PID 73974 (started by arpitchauhan in /Users/arpitchauhan/Desktop/Projects/Java/market-data-ingestion-service)
+2026-11-06T03:16:16.673+05:30 INFO  [] [] [] [    Test worker] c.e.s.m.ProductionReadinessTest          : The following 1 profile is active: "test"
+2026-11-06T03:16:17.027+05:30 INFO  [] [] [] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-06T03:16:17.084+05:30 INFO  [] [] [] [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 54 ms. Found 7 JPA repository interfaces.
+2026-11-06T03:16:17.302+05:30 INFO  [] [] [] [    Test worker] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-11-06T03:16:17.328+05:30 INFO  [] [] [] [    Test worker] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.2.0.Final
+2026-11-06T03:16:17.488+05:30 INFO  [] [] [] [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-06T03:16:17.501+05:30 INFO  [] [] [] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-06T03:16:17.564+05:30 INFO  [] [] [] [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-11-06T03:16:17.565+05:30 INFO  [] [] [] [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-06T03:16:17.575+05:30 WARN  [] [] [] [    Test worker] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-11-06T03:16:17.584+05:30 INFO  [] [] [] [    Test worker] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [jdbc:h2:mem:testdb]
 	Database driver: H2 JDBC Driver
 	Database dialect: H2Dialect
@@ -49,32 +50,47 @@ You may wish to exclude one of them to ensure predictable runtime behavior
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-03:02:49.615 INFO  [    Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-03:02:49.636 INFO  [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-03:02:49.672 INFO  [    Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
-03:02:50.280 WARN  [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-03:02:50.288 INFO  [    Test worker] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
-03:02:50.336 INFO  [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsService
-03:02:50.625 INFO  [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-03:02:50.626 INFO  [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-03:02:50.628 INFO  [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
-03:02:50.633 INFO  [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 7 ms
-03:02:50.653 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
-03:02:50.653 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@38371a7e]]
-03:02:50.653 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
-03:02:50.662 INFO  [    Test worker] c.e.s.m.ProductionReadinessTest          : Started ProductionReadinessTest in 2.36 seconds (process running for 2.784)
-03:02:51.020 WARN  [    Test worker] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'request_token' for method parameter type String is not present]
-03:02:51.128 WARN  [    Test worker] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 23505, SQLState: 23505
-03:02:51.129 WARN  [    Test worker] org.hibernate.orm.jdbc.error             : Unique index or primary key violation: "PUBLIC.UK_BACKGROUND_JOBS_ACTIVE_KEY INDEX PUBLIC.UK_BACKGROUND_JOBS_ACTIVE_KEY_INDEX_9 ON PUBLIC.BACKGROUND_JOBS(ACTIVE_KEY NULLS FIRST) VALUES ( /* 1 */ 'CANDLE_BACKFILL' )"; SQL statement:
+2026-11-06T03:16:17.948+05:30 INFO  [] [] [] [    Test worker] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-06T03:16:17.972+05:30 INFO  [] [] [] [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-06T03:16:18.008+05:30 INFO  [] [] [] [    Test worker] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-11-06T03:16:18.615+05:30 WARN  [] [] [] [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-11-06T03:16:18.622+05:30 INFO  [] [] [] [    Test worker] o.s.v.b.OptionalValidatorFactoryBean     : Failed to set up a Bean Validation provider: jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
+2026-11-06T03:16:18.662+05:30 INFO  [] [] [] [    Test worker] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name userDetailsService
+2026-11-06T03:16:18.949+05:30 INFO  [] [] [] [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-11-06T03:16:18.949+05:30 INFO  [] [] [] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-06T03:16:18.952+05:30 INFO  [] [] [] [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+2026-11-06T03:16:18.957+05:30 INFO  [] [] [] [    Test worker] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 8 ms
+2026-11-06T03:16:18.978+05:30 INFO  [] [] [] [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2026-11-06T03:16:18.978+05:30 INFO  [] [] [] [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@7c060680]]
+2026-11-06T03:16:18.978+05:30 INFO  [] [] [] [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2026-11-06T03:16:18.988+05:30 INFO  [] [] [] [    Test worker] c.e.s.m.ProductionReadinessTest          : Started ProductionReadinessTest in 2.413 seconds (process running for 2.885)
+2026-11-06T03:16:19.253+05:30 INFO  [574b3c27-953a-486c-b6d3-8b3bda6e4955] [http] [] [    Test worker] c.e.s.m.logging.RequestLoggingFilter     : GET  -> 401 in 9 ms
+2026-11-06T03:16:19.321+05:30 INFO  [4501e2a8-246c-4abe-9aa7-c9b6df4fa417] [http] [] [    Test worker] c.e.s.m.logging.RequestLoggingFilter     : GET  -> 200 in 66 ms
+2026-11-06T03:16:19.343+05:30 INFO  [16899c8c-b03c-486d-9c50-7ae549be68ac] [http] [] [    Test worker] c.e.s.m.logging.RequestLoggingFilter     : GET  -> 200 in 20 ms
+2026-11-06T03:16:19.345+05:30 INFO  [6dcd571c-58d2-46ce-a6d2-7ac57ecebf1f] [http] [] [    Test worker] c.e.s.m.controller.ApiExceptionHandler   : Request failed with 400: Required parameter 'request_token' is missing
+2026-11-06T03:16:19.353+05:30 INFO  [6dcd571c-58d2-46ce-a6d2-7ac57ecebf1f] [http] [] [    Test worker] c.e.s.m.logging.RequestLoggingFilter     : GET  -> 400 in 9 ms
+2026-11-06T03:16:19.391+05:30 INFO  [e45ba586-f2a6-4bea-81f2-41d347965fe1] [http] [] [    Test worker] c.e.s.m.logging.RequestLoggingFilter     : GET  -> 200 in 38 ms
+2026-11-06T03:16:19.455+05:30 WARN  [] [] [] [    Test worker] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 23505, SQLState: 23505
+2026-11-06T03:16:19.455+05:30 WARN  [] [] [] [    Test worker] org.hibernate.orm.jdbc.error             : Unique index or primary key violation: "PUBLIC.UK_BACKGROUND_JOBS_ACTIVE_KEY INDEX PUBLIC.UK_BACKGROUND_JOBS_ACTIVE_KEY_INDEX_9 ON PUBLIC.BACKGROUND_JOBS(ACTIVE_KEY NULLS FIRST) VALUES ( /* 1 */ 'CANDLE_BACKFILL' )"; SQL statement:
 insert into background_jobs (active_key,created_at,daily_days,finished_at,job_type,message,minute_days,saved_count,started_at,status,updated_at,id) values (?,?,?,?,?,?,?,?,?,?,?,default) [23505-240]
-03:02:51.159 ERROR [ackground-job-1] c.e.s.m.service.CandleBackfillRunner     : Candle backfill job 3 failed
+2026-11-06T03:16:19.467+05:30 INFO  [568af9d9-fa2d-4253-b6bc-589022ce8b8b] [http] [3] [ackground-job-1] c.e.s.m.service.CandleBackfillRunner     : Candle backfill job 3 started
+2026-11-06T03:16:19.469+05:30 INFO  [568af9d9-fa2d-4253-b6bc-589022ce8b8b] [http] [] [    Test worker] c.e.s.m.logging.RequestLoggingFilter     : POST  -> 202 in 6 ms
+2026-11-06T03:16:19.473+05:30 INFO  [trace-missing-param] [http] [] [    Test worker] c.e.s.m.controller.ApiExceptionHandler   : Request failed with 400: Required parameter 'instrumentId' is missing
+2026-11-06T03:16:19.474+05:30 INFO  [trace-missing-param] [http] [] [    Test worker] c.e.s.m.logging.RequestLoggingFilter     : GET  -> 400 in 1 ms
+2026-11-06T03:16:19.476+05:30 INFO  [9e1fce7e-3136-4b73-a8a6-76c5f29e10b1] [http] [] [    Test worker] c.e.s.m.controller.ApiExceptionHandler   : Request failed with 400: Parameter 'instrumentId' has an invalid value
+2026-11-06T03:16:19.477+05:30 INFO  [9e1fce7e-3136-4b73-a8a6-76c5f29e10b1] [http] [] [    Test worker] c.e.s.m.logging.RequestLoggingFilter     : GET  -> 400 in 2 ms
+2026-11-06T03:16:19.481+05:30 INFO  [847962ed-e7c3-4da7-8a1b-2a513b3db053] [http] [] [    Test worker] c.e.s.m.controller.ApiExceptionHandler   : Request failed with 404: Instrument not found: 99
+2026-11-06T03:16:19.483+05:30 INFO  [847962ed-e7c3-4da7-8a1b-2a513b3db053] [http] [] [    Test worker] c.e.s.m.logging.RequestLoggingFilter     : GET  -> 404 in 4 ms
+2026-11-06T03:16:19.487+05:30 INFO  [bc1b0d5a-27b7-4658-a57f-ba0eade4c58b] [http] [] [    Test worker] c.e.s.m.controller.ApiExceptionHandler   : Request failed with 404: No endpoint matched this request
+2026-11-06T03:16:19.487+05:30 INFO  [bc1b0d5a-27b7-4658-a57f-ba0eade4c58b] [http] [] [    Test worker] c.e.s.m.logging.RequestLoggingFilter     : GET  -> 404 in 3 ms
+2026-11-06T03:16:19.489+05:30 ERROR [568af9d9-fa2d-4253-b6bc-589022ce8b8b] [http] [3] [ackground-job-1] c.e.s.m.service.CandleBackfillRunner     : Candle backfill job 3 failed
 com.example.stockanalyzer.marketdata.exception.MarketDataException: No active data source configured
-	at com.example.stockanalyzer.marketdata.service.CandleIngestionService.lambda$activeDataSource$2(CandleIngestionService.java:68)
+	at com.example.stockanalyzer.marketdata.service.CandleIngestionService.lambda$activeDataSource$2(CandleIngestionService.java:69)
 	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
-	at com.example.stockanalyzer.marketdata.service.CandleIngestionService.activeDataSource(CandleIngestionService.java:68)
-	at com.example.stockanalyzer.marketdata.service.CandleIngestionService.fetchRange(CandleIngestionService.java:45)
+	at com.example.stockanalyzer.marketdata.service.CandleIngestionService.activeDataSource(CandleIngestionService.java:69)
+	at com.example.stockanalyzer.marketdata.service.CandleIngestionService.fetchRange(CandleIngestionService.java:46)
 	at com.example.stockanalyzer.marketdata.service.HistoricalCandleService.backfill(HistoricalCandleService.java:27)
-	at com.example.stockanalyzer.marketdata.service.CandleBackfillRunner.run(CandleBackfillRunner.java:23)
+	at com.example.stockanalyzer.marketdata.service.CandleBackfillRunner.run(CandleBackfillRunner.java:27)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
@@ -82,12 +98,15 @@ com.example.stockanalyzer.marketdata.exception.MarketDataException: No active da
 	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
 	at org.springframework.aop.interceptor.AsyncExecutionInterceptor.lambda$invoke$0(AsyncExecutionInterceptor.java:112)
 	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at com.example.stockanalyzer.marketdata.config.BackgroundJobExecutorConfig.lambda$taskExecutor$0(BackgroundJobExecutorConfig.java:30)
 	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
 	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
 	at java.base/java.lang.Thread.run(Thread.java:1583)
-03:02:51.161 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
-03:02:51.161 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@38371a7e]]
-03:02:51.162 INFO  [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2026-11-06T03:16:19.500+05:30 INFO  [ede57c30-97fa-4633-bfd7-f0883c655f30] [http] [] [    Test worker] c.e.s.m.controller.ApiExceptionHandler   : Request failed with 400: Request body could not be read
+2026-11-06T03:16:19.501+05:30 INFO  [ede57c30-97fa-4633-bfd7-f0883c655f30] [http] [] [    Test worker] c.e.s.m.logging.RequestLoggingFilter     : POST  -> 400 in 13 ms
+2026-11-06T03:16:19.504+05:30 INFO  [] [] [] [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2026-11-06T03:16:19.504+05:30 INFO  [] [] [] [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@7c060680]]
+2026-11-06T03:16:19.504+05:30 INFO  [] [] [] [    Test worker] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
 ]]></system-out>
   <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
 WARNING: A Java agent has been loaded dynamically (/private/var/folders/h6/kcwr1n4n7mj_488x7w0gkf_m0000gn/T/cursor-sandbox-cache/9db437cce68127a85ff9062ec263fa6f/gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.17.8/f09415827a71be7ed621c7bd02550678f28bc81c/byte-buddy-agent-1.17.8.jar)

@@ -3,6 +3,7 @@ package com.example.stockanalyzer.marketdata.scheduler;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import com.example.stockanalyzer.marketdata.auth.ProviderAuthRegistry;
+import com.example.stockanalyzer.marketdata.logging.IncidentContext;
 import com.example.stockanalyzer.marketdata.repository.DataSourceRepository;
 import com.example.stockanalyzer.marketdata.service.ClusterLeaderService;
 import lombok.RequiredArgsConstructor;
@@ -22,13 +23,15 @@ public class ProviderSessionRefreshScheduler {
         if (!clusterLeaderService.isLeader()) {
             return;
         }
-        dataSourceRepository.findByIsActiveTrueOrderByPriorityAsc().forEach(dataSource -> {
-            try {
-                providerAuthRegistry.resolve(dataSource).refreshSession(dataSource);
-                log.info("Refreshed session for data source {}", dataSource.getName());
-            } catch (Exception e) {
-                log.error("Session refresh failed for data source {}", dataSource.getName(), e);
-            }
-        });
+        try (IncidentContext ignored = IncidentContext.open("session-refresh")) {
+            dataSourceRepository.findByIsActiveTrueOrderByPriorityAsc().forEach(dataSource -> {
+                try {
+                    providerAuthRegistry.resolve(dataSource).refreshSession(dataSource);
+                    log.info("Refreshed session for data source {}", dataSource.getName());
+                } catch (Exception e) {
+                    log.error("Session refresh failed for data source {}", dataSource.getName(), e);
+                }
+            });
+        }
     }
 }

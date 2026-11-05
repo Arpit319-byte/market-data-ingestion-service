@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -20,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.example.stockanalyzer.marketdata.logging.RequestLoggingFilter;
 import com.example.stockanalyzer.marketdata.entities.RuntimeLeader;
 import com.example.stockanalyzer.marketdata.exception.ConflictException;
 import com.example.stockanalyzer.marketdata.repository.BackgroundJobRepository;
@@ -66,6 +68,32 @@ class ProductionReadinessTest {
         mockMvc.perform(get("/api/v1/health/market").header("X-API-Key", "test-key"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.kiteSession").value("absent"));
+    }
+
+    @Test
+    void requestErrorsUseTheApiErrorBody() throws Exception {
+        mockMvc.perform(get("/api/v1/candles").header("X-API-Key", "test-key").header("X-Request-Id", "trace-missing-param"))
+                .andExpect(status().isBadRequest())
+                .andExpect(header().string(RequestLoggingFilter.REQUEST_ID_HEADER, "trace-missing-param"))
+                .andExpect(jsonPath("$.status").value(400))
+                .andExpect(jsonPath("$.requestId").value("trace-missing-param"))
+                .andExpect(jsonPath("$.message").value("Required parameter 'instrumentId' is missing"));
+
+        mockMvc.perform(get("/api/v1/candles").header("X-API-Key", "test-key").param("instrumentId", "abc"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Parameter 'instrumentId' has an invalid value"));
+
+        mockMvc.perform(get("/api/v1/candles").header("X-API-Key", "test-key").param("instrumentId", "99"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value("Instrument not found: 99"));
+
+        mockMvc.perform(get("/api/v1/missing").header("X-API-Key", "test-key"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value("No endpoint matched this request"));
+
+        mockMvc.perform(post("/api/v1/candles/fetch").header("X-API-Key", "test-key").content("{").contentType("application/json"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Request body could not be read"));
     }
 
     @Test

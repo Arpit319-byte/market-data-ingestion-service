@@ -108,7 +108,7 @@ public class OneMinuteCandleAggregator implements TradeTickListener, ClosedCandl
         }
         try {
             int saved = candleStore.save(candles);
-            log.debug("Saved {} live 1-minute candles", saved);
+            log.info("Saved {} live 1-minute candles", saved);
         } catch (RuntimeException e) {
             log.error("Failed to save {} live candles", candles.size(), e);
         }

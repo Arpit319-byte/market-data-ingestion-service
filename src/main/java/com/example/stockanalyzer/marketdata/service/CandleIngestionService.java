@@ -11,6 +11,7 @@ import com.example.stockanalyzer.marketdata.entities.DataSource;
 import com.example.stockanalyzer.marketdata.entities.Instrument;
 import com.example.stockanalyzer.marketdata.entities.IntervalType;
 import com.example.stockanalyzer.marketdata.exception.MarketDataException;
+import com.example.stockanalyzer.marketdata.exception.NotFoundException;
 import com.example.stockanalyzer.marketdata.provider.MarketDataProvider;
 import com.example.stockanalyzer.marketdata.provider.MarketDataProviderRegistry;
 import com.example.stockanalyzer.marketdata.repository.DataSourceRepository;
@@ -35,9 +36,9 @@ public class CandleIngestionService {
 
     public int fetchAndSave(FetchCandlesRequest request) {
         DataSource dataSource = dataSourceRepository.findById(request.getDataSourceId())
-                .orElseThrow(() -> new MarketDataException("Data source not found: " + request.getDataSourceId()));
+                .orElseThrow(() -> new NotFoundException("Data source not found: " + request.getDataSourceId()));
         Instrument instrument = instrumentRepository.findById(request.getInstrumentId())
-                .orElseThrow(() -> new MarketDataException("Instrument not found: " + request.getInstrumentId()));
+                .orElseThrow(() -> new NotFoundException("Instrument not found: " + request.getInstrumentId()));
         return fetchOne(dataSource, instrument, request);
     }
 

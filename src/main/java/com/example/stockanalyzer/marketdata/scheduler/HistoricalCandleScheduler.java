@@ -3,6 +3,7 @@ package com.example.stockanalyzer.marketdata.scheduler;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.example.stockanalyzer.marketdata.logging.IncidentContext;
 import com.example.stockanalyzer.marketdata.service.CandleRetentionService;
 import com.example.stockanalyzer.marketdata.service.ClusterLeaderService;
 import com.example.stockanalyzer.marketdata.service.HistoricalCandleService;
@@ -24,10 +25,12 @@ public class HistoricalCandleScheduler {
         if (!clusterLeaderService.isLeader()) {
             return;
         }
-        try {
-            historicalCandleService.reconcileToday();
-        } catch (RuntimeException e) {
-            log.error("Daily candle reconciliation failed", e);
+        try (IncidentContext ignored = IncidentContext.open("reconciliation")) {
+            try {
+                historicalCandleService.reconcileToday();
+            } catch (RuntimeException e) {
+                log.error("Daily candle reconciliation failed", e);
+            }
         }
     }
 
@@ -36,10 +39,12 @@ public class HistoricalCandleScheduler {
         if (!clusterLeaderService.isLeader()) {
             return;
         }
-        try {
-            candleRetentionService.pruneOldOneMinuteCandles();
-        } catch (RuntimeException e) {
-            log.error("One-minute candle retention failed", e);
+        try (IncidentContext ignored = IncidentContext.open("retention")) {
+            try {
+                candleRetentionService.pruneOldOneMinuteCandles();
+            } catch (RuntimeException e) {
+                log.error("One-minute candle retention failed", e);
+            }
         }
     }
 }
