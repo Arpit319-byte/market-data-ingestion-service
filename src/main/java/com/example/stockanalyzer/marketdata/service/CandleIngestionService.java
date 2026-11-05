@@ -47,8 +47,8 @@ public class CandleIngestionService {
                 .orElseThrow(() -> new MarketDataException("No active data source configured"));
         MarketDataProvider provider = providerRegistry.resolve(dataSource);
 
-        // Instant to = Instant.now();
-        // Instant from = to.minusSeconds(intervalType.getMinutes() * 60L * 3L);
+        Instant to = Instant.now();
+        Instant from = to.minusSeconds(intervalType.getMinutes() * 60L * 3L);
         int saved = 0;
 
         for (Instrument instrument : instrumentRepository.findByIsActiveTrueAndKiteInstrumentTokenIsNotNull()) {
